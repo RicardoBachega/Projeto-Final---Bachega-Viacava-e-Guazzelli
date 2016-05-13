@@ -1,9 +1,5 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sun May  1 19:43:00 2016
-
-@author: Henrique
-"""
+import armazenamento as amz
+import email
 
 from tkinter import *
 from tkinter import ttk
@@ -37,7 +33,7 @@ class BBQ:
         self.mainframe.rowconfigure(0, weight=1)
         
         self.frames = {}
-        self.window.iconbitmap(self, default='beef2.ico')
+        #self.window.iconbitmap(self, default='beef2.ico')
         
         for F in (PaginaInicial, PaginaMyBBQ, PaginaParticipantes, PaginaCarnes, PaginaBebidas):
             
@@ -65,12 +61,16 @@ class PaginaInicial(ttk.Frame):
         label.grid(row=0, column=2, sticky="nsew")
         
         nbbqbutton = ttk.Button(self, text='GERENCIAR CHURRASCO', style = 'NuclearReactor.TButton',
-                               command=lambda: controller.mostrar_frame(PaginaMyBBQ))
+                               command=self.botao_gerenciar_apertado(controller))
         nbbqbutton.grid(column=2, row=1, sticky=("nsew"))
         
         ebbqbutton = ttk.Button(self, text='NOVO CHURRASCO',
                                command=lambda: controller.mostrar_frame(PaginaMyBBQ))
         ebbqbutton.grid(column=2, row=2, sticky=("nsew"))
+        
+    def botao_gerenciar_apertado(self, controller):
+        controller.mostrar_frame(PaginaMyBBQ)
+        amz.leitura()
         
 class PaginaMyBBQ(ttk.Frame):
     
