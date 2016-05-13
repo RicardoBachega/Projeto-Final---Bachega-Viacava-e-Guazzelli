@@ -7,7 +7,7 @@ from tkinter import ttk
 #from tkinter import *
 #from tkinter import ttk
 
-class BBQ:
+class BBQ(ttk.Frame):
     def __init__(self):
         #janela inicial
         self.window = Tk()
@@ -32,8 +32,9 @@ class BBQ:
         self.mainframe.columnconfigure(0, weight=1)
         self.mainframe.rowconfigure(0, weight=1)
         
+        self.window.iconbitmap(self, default='beef2.ico')
+       
         self.frames = {}
-        #self.window.iconbitmap(self, default='beef2.ico')
         
         for F in (PaginaInicial, PaginaMyBBQ, PaginaParticipantes, PaginaCarnes, PaginaBebidas):
             
@@ -59,9 +60,10 @@ class PaginaInicial(ttk.Frame):
         ttk.Frame.__init__(self, parent)
         label = ttk.Label(self, text="")
         label.grid(row=0, column=2, sticky="nsew")
-        
+
         nbbqbutton = ttk.Button(self, text='GERENCIAR CHURRASCO', style = 'NuclearReactor.TButton',
                                command=self.botao_gerenciar_apertado(controller))
+
         nbbqbutton.grid(column=2, row=1, sticky=("nsew"))
         
         ebbqbutton = ttk.Button(self, text='NOVO CHURRASCO',
@@ -116,25 +118,41 @@ class PaginaParticipantes(ttk.Frame):
 
         AddButton = ttk.Button(self, text='Adicionar Convidado')
         AddButton.grid(column=2, row=1, sticky=("nsew"))
+        
+        #self.namevar = StringVar()
         name = ttk.Entry(self)
-        name.grid(column=1, row=1, sticky=("nsew"))                     
+        #self.namevar.set(name)
+        name.grid(column=1, row=1, sticky=("nsew"))  
+
+        #listbox_convidados = Listbox(PaginaParticipantes)
+        #listbox_convidados.grid(row=2, column=1, sticky=('nsew'))
+               
  
 class PaginaCarnes(ttk.Frame):
     
     def __init__(self, parent, controller):
         ttk.Frame.__init__(self, parent)
+        self.columnconfigure(2, minsize = 50)
+        self.columnconfigure(3, minsize = 50)
+        self.columnconfigure(4, minsize = 50)
+        self.columnconfigure(5, minsize = 50)
         label = ttk.Label(self, text="Carnes")
         label.grid(row=0, column=2, sticky="nsew")
                 
        #SCROLLBAR
         #s = ttk.Scrollbar(self, orient=VERTICAL, command=listbox.yview)
         #listbox.configure(yscrollcommand=s.set)
+                
+        preçoc = ttk.Label(self, text = 'Preço')        
+        preçoc.grid(row=0, column=4, sticky = 'nsew')
         
         self.varc9 = IntVar()
         carne9 = ttk.Label(self, text="Acém")
         carne9.grid(row=1, column=2, sticky="nsew")
         checkc9 = ttk.Checkbutton(self, variable=self.varc9)
         checkc9.grid(row=1, column=3,sticky="nsew")
+        preçoc9 = ttk.Entry(self)
+        preçoc9.grid(column=4, row=1, sticky=("nsew")) 
         
         self.varc6 = IntVar()
         #self.varc6.set(0)
@@ -224,29 +242,38 @@ class PaginaBebidas(ttk.Frame):
         label = ttk.Label(self, text="BEBIDAS")
         label.grid(row=0, column=2, sticky="nsew")
         
+        bebidas_alcol = ttk.Label(self, text = 'ALCOÓLICAS')        
+        bebidas_alcol.grid(row=1, column=2, sticky = 'nsew')
+        
+        preçob = ttk.Label(self, text = 'Preço')        
+        preçob.grid(row=1, column=4, sticky = 'nsew')
+        
         self.varb1 = IntVar()
-        bebida1 = ttk.Label(self, text="cerveja")
-        bebida1.grid(row=1, column=2, sticky="nsew")
+        bebida1 = ttk.Label(self, text="Cerveja")
+        bebida1.grid(row=2, column=2, sticky="nsew")
         checkb1 = ttk.Checkbutton(self, variable=self.varb1)
-        checkb1.grid(row=1, column=3,sticky="nsew")
+        checkb1.grid(row=2, column=3,sticky="nsew")
         
         self.varb2 = IntVar()
-        bebida2 = ttk.Label(self, text="")
-        bebida2.grid(row=2, column=2, sticky="nsew")
-        checkb2 = ttk.Checkbutton(self, variable=self.varb2)
-        checkb2.grid(row=2, column=3,sticky="nsew")
-        
-        self.varb2 = IntVar()
-        bebida2 = ttk.Label(self, text="")
-        bebida2.grid(row=2, column=2, sticky="nsew")
+        bebida2 = ttk.Label(self, text="Vodka")
+        bebida2.grid(row=3, column=2, sticky="nsew")
         checkb2 = ttk.Checkbutton(self, variable=self.varb2)
         checkb2.grid(row=3, column=3,sticky="nsew")
         
-        self.varb2 = IntVar()
-        bebida2 = ttk.Label(self, text="")
-        bebida2.grid(row=2, column=2, sticky="nsew")
-        checkb2 = ttk.Checkbutton(self, variable=self.varb2)
-        checkb2.grid(row=4, column=3,sticky="nsew")        
+        self.varb3 = IntVar()
+        bebida3 = ttk.Label(self, text="Skol Beats")
+        bebida3.grid(row=4, column=2, sticky="nsew")
+        checkb3 = ttk.Checkbutton(self, variable=self.varb3)
+        checkb3.grid(row=4, column=3,sticky="nsew")
+        
+        self.varb4 = IntVar()
+        bebida4 = ttk.Label(self, text="")
+        bebida4.grid(row=5, column=2, sticky="nsew")
+        checkb4 = ttk.Checkbutton(self, variable=self.varb4)
+        checkb4.grid(row=5, column=3,sticky="nsew")       
+        
+        bebidas_nalcol = ttk.Label(self, text = 'NÃO ALCOÓLICAS')        
+        bebidas_nalcol.grid(row=10, column=2, sticky = 'nsew')
         
         VoltarButton = ttk.Button(self, text='VOLTAR',
                                command=lambda: controller.mostrar_frame(PaginaMyBBQ))
