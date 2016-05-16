@@ -1,6 +1,6 @@
 import pickle
 
-# base_dir =  r"C:\Users\B155 FIRE V3\Desktop\Escola\2016\Design de Software\Projeto Final"
+base_dir =  r"C:\Users\B155 FIRE V3\Desktop\Escola\2016\Design de Software\Projeto Final"
 
 def armazena(dicionario_comidas, dicionario_bebidas, dicionario_convidados, base_dir):
     
@@ -43,10 +43,13 @@ def zera_dicionarios(dicionario_comidas, dicionario_bebidas, dicionario_convidad
 
     armazena(dicionario_comidas, dicionario_bebidas, dicionario_convidados, base_dir)
     
+    return dicionario_comidas, dicionario_bebidas, dicionario_convidados
+    
 def novo_churrasco(base_dir):
     dicionario_convidados, dicionario_comidas, dicionario_bebidas = leitura(base_dir)
     zera_dicionarios(dicionario_comidas, dicionario_bebidas, dicionario_convidados, base_dir)
-    
+    armazena(dicionario_comidas, dicionario_bebidas, dicionario_convidados, base_dir)
+
     convidados = dicionario_convidados
     comidas = dicionario_comidas
     bebidas = dicionario_bebidas
