@@ -35,7 +35,12 @@ class BBQ(ttk.Frame):
        
         self.frames = {}
         
+<<<<<<< HEAD
+        for F in (PaginaInicial, PaginaMyBBQ, PaginaParticipantes, PaginaCarnes, PaginaBebidas, PaginaRelatório):
+            
+=======
         for F in (PaginaInicial, PaginaMyBBQ, PaginaParticipantes, PaginaCarnes, PaginaBebidas):
+>>>>>>> 96b268455899c8a69c66336c0353160706e79634
             frame = F(self.mainframe, self)
             self.frames[F] = frame
             frame.grid(row=0, column=0, sticky="nsew")
@@ -99,11 +104,15 @@ class PaginaMyBBQ(ttk.Frame):
         #botao que volta a pagina inicial
         PIbutton = ttk.Button(self, text='menu inicial',
                                command=lambda: controller.mostrar_frame(PaginaInicial))
-        PIbutton.grid(column=2, row=5, sticky=("nsew"))                  
+        PIbutton.grid(column=2, row=6, sticky=("nsew"))        
+
+        relatórioButton = ttk.Button(self, text='RELATÓRIO',
+                               command=lambda: controller.mostrar_frame(PaginaRelatório))
+        relatórioButton.grid(column=2, row=4, sticky=("nsew"))          
         
         saveexitButton = ttk.Button(self, text='SALVAR E FECHAR')
                                #command=lambda: controller.mostrar_frame(PaginaParticipantes))
-        saveexitButton.grid(column=2, row=4, sticky=("nsew"))
+        saveexitButton.grid(column=2, row=5, sticky=("nsew"))
 
 class PaginaParticipantes(ttk.Frame):
     
@@ -119,9 +128,8 @@ class PaginaParticipantes(ttk.Frame):
         AddButton = ttk.Button(self, text='Adicionar Convidado')
         AddButton.grid(column=2, row=1, sticky=("nsew"))
         
-        #self.namevar = StringVar()
-        name = ttk.Entry(self)
-        #self.namevar.set(name)
+        self.namevar = StringVar()
+        name = ttk.Entry(self, textvariable = self.namevar)
         name.grid(column=1, row=1, sticky=("nsew"))  
 
         listbox_convidados = Listbox(self)
@@ -129,7 +137,6 @@ class PaginaParticipantes(ttk.Frame):
 
         s = ttk.Scrollbar(listbox_convidados, orient=VERTICAL, command=listbox_convidados.yview)
         listbox_convidados.configure(yscrollcommand=s.set)
-                
 
 class PaginaCarnes(ttk.Frame):
     
@@ -282,6 +289,16 @@ class PaginaBebidas(ttk.Frame):
                                command=lambda: controller.mostrar_frame(PaginaMyBBQ))
         VoltarButton.grid(column=3, row=100, sticky=("nsew"))
         
+class PaginaRelatório(ttk.Frame):
+    
+    def __init__(self, parent, controller):
+        ttk.Frame.__init__(self, parent)
+        label = ttk.Label(self, text="Relatório")
+        label.grid(row=0, column=2, sticky="nsew")
+        
+        VoltarButton = ttk.Button(self, text='VOLTAR',
+                               command=lambda: controller.mostrar_frame(PaginaMyBBQ))
+        VoltarButton.grid(column=3, row=100, sticky=("nsew"))
         
 app = BBQ()
 app.iniciar()
