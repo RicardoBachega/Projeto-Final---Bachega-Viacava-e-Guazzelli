@@ -62,7 +62,7 @@ class PaginaInicial(ttk.Frame):
         label.grid(row=0, column=2, sticky="nsew")
 
         nbbqbutton = ttk.Button(self, text='GERENCIAR CHURRASCO', style = 'NuclearReactor.TButton',
-                               command=self.botao_gerenciar_apertado(controller))
+                               command=lambda: controller.mostrar_frame(PaginaMyBBQ))
 
         nbbqbutton.grid(column=2, row=1, sticky=("nsew"))
         
@@ -124,10 +124,13 @@ class PaginaParticipantes(ttk.Frame):
         #self.namevar.set(name)
         name.grid(column=1, row=1, sticky=("nsew"))  
 
-        #listbox_convidados = Listbox(PaginaParticipantes)
-        #listbox_convidados.grid(row=2, column=1, sticky=('nsew'))
-               
- 
+        listbox_convidados = Listbox(self)
+        listbox_convidados.grid(row=2, column=1, sticky=('nsew'))
+
+        s = ttk.Scrollbar(listbox_convidados, orient=VERTICAL, command=listbox_convidados.yview)
+        listbox_convidados.configure(yscrollcommand=s.set)
+                
+
 class PaginaCarnes(ttk.Frame):
     
     def __init__(self, parent, controller):
