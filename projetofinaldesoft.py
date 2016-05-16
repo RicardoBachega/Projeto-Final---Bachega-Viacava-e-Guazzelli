@@ -1,7 +1,7 @@
 import armazenamento as amz
 import email
 
-base_dir =  r"C:\Users\B155 FIRE V3\Desktop\Escola\2016\Design de Software\Projeto Final"
+base_dir =  r"C:\Users\Henrique\Documents\DESOFT\Projeto-Final---Bachega-Viacava-e-Guazzelli"
 
 from tkinter import *
 from tkinter import ttk
@@ -288,9 +288,16 @@ class PaginaBebidas(ttk.Frame):
 class PaginaRelatório(ttk.Frame):
     
     def __init__(self, parent, controller):
+        dicionario_convidados, dicionario_comidas, dicionario_bebidas = amz.leitura(base_dir)
         ttk.Frame.__init__(self, parent)
         label = ttk.Label(self, text="Relatório")
         label.grid(row=0, column=2, sticky="nsew")
+        label2 = ttk.Label(self, text=dicionario_convidados)
+        label2.grid(row=1, column = 2, sticky="nsew")
+        label3 = ttk.Label(self, text=dicionario_comidas)
+        label3.grid(row=2, column = 2, sticky="nsew")
+        label4 = ttk.Label(self, text=dicionario_bebidas)
+        label4.grid(row=3, column=2, sticky="nsew")
         
         VoltarButton = ttk.Button(self, text='VOLTAR',
                                command=lambda: controller.mostrar_frame(PaginaMyBBQ))
