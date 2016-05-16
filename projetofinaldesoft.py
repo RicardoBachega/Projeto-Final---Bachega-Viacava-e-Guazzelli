@@ -50,9 +50,14 @@ class BBQ(ttk.Frame):
         self.window.mainloop()   
     
     def botao_novo_churrasco(self, cont):
-        amz.novo_churrasco(base_dir)
+        dicionario_convidados, dicionario_comidas, dicionario_bebidas = amz.novo_churrasco(base_dir)
         self.mostrar_frame(PaginaMyBBQ)
-
+    
+    def botao_gerenciar_churrasco(self, cont):
+        dicionario_convidados, dicionario_comidas, dicionario_bebidas = amz.leitura(base_dir)
+        self.mostrar_frame(PaginaMyBBQ)
+        print(dicionario_convidados)
+        
 class PaginaInicial(ttk.Frame):
     
     def __init__(self, parent, controller):
@@ -61,17 +66,13 @@ class PaginaInicial(ttk.Frame):
         label.grid(row=0, column=2, sticky="nsew")
 
         nbbqbutton = ttk.Button(self, text='GERENCIAR CHURRASCO', style = 'NuclearReactor.TButton',
-                               command=lambda: controller.mostrar_frame(PaginaMyBBQ))
+                               command=lambda: controller.botao_gerenciar_churrasco(self))
 
         nbbqbutton.grid(column=2, row=1, sticky=("nsew"))
         
         ebbqbutton = ttk.Button(self, text='NOVO CHURRASCO',
                                command=lambda: controller.botao_novo_churrasco(self))
         ebbqbutton.grid(column=2, row=2, sticky=("nsew"))
-        
-    def botao_gerenciar_apertado(self, controller):
-        controller.mostrar_frame(PaginaMyBBQ)
-        amz.leitura()
         
 class PaginaMyBBQ(ttk.Frame):
     
