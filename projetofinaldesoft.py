@@ -35,12 +35,8 @@ class BBQ(ttk.Frame):
        
         self.frames = {}
         
-<<<<<<< HEAD
         for F in (PaginaInicial, PaginaMyBBQ, PaginaParticipantes, PaginaCarnes, PaginaBebidas, PaginaRelatório):
-            
-=======
-        for F in (PaginaInicial, PaginaMyBBQ, PaginaParticipantes, PaginaCarnes, PaginaBebidas):
->>>>>>> 96b268455899c8a69c66336c0353160706e79634
+
             frame = F(self.mainframe, self)
             self.frames[F] = frame
             frame.grid(row=0, column=0, sticky="nsew")
