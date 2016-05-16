@@ -1,11 +1,10 @@
 import armazenamento as amz
 import email
 
+base_dir =  r"C:\Users\B155 FIRE V3\Desktop\Escola\2016\Design de Software\Projeto Final"
+
 from tkinter import *
 from tkinter import ttk
-#from tkinter import *
-#from tkinter import *
-#from tkinter import ttk
 
 class BBQ(ttk.Frame):
     def __init__(self):
@@ -37,22 +36,22 @@ class BBQ(ttk.Frame):
         self.frames = {}
         
         for F in (PaginaInicial, PaginaMyBBQ, PaginaParticipantes, PaginaCarnes, PaginaBebidas):
-            
             frame = F(self.mainframe, self)
-            
             self.frames[F] = frame
-            
             frame.grid(row=0, column=0, sticky="nsew")
             
         self.mostrar_frame(PaginaInicial)        
     
     def mostrar_frame(self, cont):
-        
         frame = self.frames[cont]
         frame.tkraise()    
     
     def iniciar(self):
-        self.window.mainloop()      
+        self.window.mainloop()   
+    
+    def botao_novo_churrasco(self, cont):
+        amz.novo_churrasco(base_dir)
+        self.mostrar_frame(PaginaMyBBQ)
 
 class PaginaInicial(ttk.Frame):
     
@@ -67,7 +66,7 @@ class PaginaInicial(ttk.Frame):
         nbbqbutton.grid(column=2, row=1, sticky=("nsew"))
         
         ebbqbutton = ttk.Button(self, text='NOVO CHURRASCO',
-                               command=lambda: controller.mostrar_frame(PaginaMyBBQ))
+                               command=lambda: controller.botao_novo_churrasco(self))
         ebbqbutton.grid(column=2, row=2, sticky=("nsew"))
         
     def botao_gerenciar_apertado(self, controller):
