@@ -1,8 +1,8 @@
 import armazenamento as amz
 import email
 
-base_dir =  r"C:\Users\Henrique\Documents\DESOFT\Projeto-Final---Bachega-Viacava-e-Guazzelli"
-
+#base_dir =  r"C:\Users\Henrique\Documents\DESOFT\Projeto-Final---Bachega-Viacava-e-Guazzelli"
+base_dir = r"C:\Users\B155 FIRE V3\Documents\Projeto-Final---Bachega-Viacava-e-Guazzelli"
 from tkinter import *
 from tkinter import ttk
 
@@ -41,7 +41,7 @@ class BBQ(ttk.Frame):
             self.frames[F] = frame
             frame.grid(row=0, column=0, sticky="nsew")
             
-        self.mostrar_frame(PaginaInicial)        
+        self.mostrar_frame(PaginaInicial)            
     
     def mostrar_frame(self, cont):
         frame = self.frames[cont]
@@ -57,8 +57,12 @@ class BBQ(ttk.Frame):
     def botao_gerenciar_churrasco(self, cont):
         dicionario_convidados, dicionario_comidas, dicionario_bebidas = amz.leitura(base_dir)
         self.mostrar_frame(PaginaMyBBQ)
-        print(dicionario_convidados)
         
+    def salvar_e_fechar(self, base_dir):
+        dicionario_convidados, dicionario_comidas, dicionario_bebidas = amz.leitura(base_dir)
+        amz.armazena(dicionario_comidas, dicionario_bebidas, dicionario_convidados, base_dir)
+        self.window.destroy()
+
 class PaginaInicial(ttk.Frame):
     
     def __init__(self, parent, controller):
@@ -106,8 +110,8 @@ class PaginaMyBBQ(ttk.Frame):
                                command=lambda: controller.mostrar_frame(PaginaRelatório))
         relatórioButton.grid(column=2, row=4, sticky=("nsew"))          
         
-        saveexitButton = ttk.Button(self, text='SALVAR E FECHAR')
-                               #command=lambda: controller.mostrar_frame(PaginaParticipantes))
+        saveexitButton = ttk.Button(self, text='SALVAR E FECHAR',
+                               command=lambda: controller.salvar_e_fechar(base_dir))
         saveexitButton.grid(column=2, row=5, sticky=("nsew"))
 
 class PaginaParticipantes(ttk.Frame):

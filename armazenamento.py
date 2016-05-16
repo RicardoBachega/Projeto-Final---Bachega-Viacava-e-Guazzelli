@@ -35,10 +35,10 @@ def leitura(base_dir):
     
 def zera_dicionarios(dicionario_comidas, dicionario_bebidas, dicionario_convidados, base_dir):
     
-    dicionario_comidas = {}
-    dicionario_bebidas = {}
+    dicionario_comidas = {"Picanha" : 0, "Fraldinha" : 0, "Maminha" : 0, "Alcatra" : 0}
+    dicionario_bebidas = {"Vodka" : 0, "Tequila" : 0, "Whisky" : 0}
     dicionario_convidados = {}
-
+    
     armazena(dicionario_comidas, dicionario_bebidas, dicionario_convidados, base_dir)
     
     return dicionario_comidas, dicionario_bebidas, dicionario_convidados
@@ -46,10 +46,5 @@ def zera_dicionarios(dicionario_comidas, dicionario_bebidas, dicionario_convidad
 def novo_churrasco(base_dir):
     dicionario_convidados, dicionario_comidas, dicionario_bebidas = leitura(base_dir)
     zera_dicionarios(dicionario_comidas, dicionario_bebidas, dicionario_convidados, base_dir)
-    armazena(dicionario_comidas, dicionario_bebidas, dicionario_convidados, base_dir)
-
-    convidados = dicionario_convidados
-    comidas = dicionario_comidas
-    bebidas = dicionario_bebidas
     
-    return convidados, comidas, bebidas
+    return dicionario_convidados, dicionario_comidas, dicionario_bebidas
