@@ -1,7 +1,5 @@
 import pickle
 
-base_dir =  r"C:\Users\B155 FIRE V3\Desktop\Escola\2016\Design de Software\Projeto Final"
-
 def armazena(dicionario_comidas, dicionario_bebidas, dicionario_convidados, base_dir):
     
     filename = base_dir + r"\arquivo_comidas.dados"
