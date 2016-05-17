@@ -6,12 +6,13 @@ base_dir =  r"C:\Users\Henrique\Documents\DESOFT\Projeto-Final---Bachega-Viacava
 from tkinter import *
 from tkinter import ttk
 
+
 class BBQ(ttk.Frame):
     def __init__(self):
         #janela inicial
         self.window = Tk()
         self.window.title("           BBQ")
-        self.window.geometry("250x350+100+100")
+        self.window.geometry("400x350+100+100")
         self.window.rowconfigure(0, minsize=50)
         self.window.rowconfigure(1, minsize=50)
         self.window.rowconfigure(2, minsize=50)
@@ -114,6 +115,7 @@ class PaginaParticipantes(ttk.Frame):
     
     def __init__(self, parent, controller):
         ttk.Frame.__init__(self, parent)
+        self.rowconfigure(2, minsize = 50)
         label = ttk.Label(self, text="CONVIDADOS")
         label.grid(row=0, column=1, sticky="nsew")
         
@@ -121,127 +123,137 @@ class PaginaParticipantes(ttk.Frame):
                                command=lambda: controller.mostrar_frame(PaginaMyBBQ))
         VoltarButton.grid(column=2, row=100, sticky=("nsew"))
 
-        AddButton = ttk.Button(self, text='Adicionar Convidado')#, command=self.add_button)
-        AddButton.grid(column=2, row=1, sticky=("nsew"))
+        self.AddButton = ttk.Button(self, text='Adicionar Convidado', command=self.add_button)
+        self.AddButton.grid(column=2, row=1, sticky=("nsew"))
         
-        namevar = StringVar()
-        name = ttk.Entry(self, textvariable=namevar)
-        name.grid(column=1, row=1, sticky=("nsew"))  
+        #redX = PhotoImage(file='redX(1).jpg')
+        removeButton = ttk.Button(self, text="Remover Convidado", command = self.remover_button)
+        removeButton.grid(column=2, row=2, sticky=("new"))
         
-        name.focus_set()
+        self.namevar = StringVar()
+        self.name_entry = ttk.Entry(self, textvariable=self.namevar)
+        self.name_entry.focus_set()     
+        self.name_entry.grid(column=1, row=1, sticky=("nsew"))
         
+        self.listbox_convidados = Listbox(self)
+        self.listbox_convidados.grid(row=2, column=1, sticky=('nsew'))
+                
+        #s = ttk.Scrollbar(listbox_convidados, orient=VERTICAL, command=listbox_convidados.yview)
+        #listbox_convidados.configure(yscrollcommand=s.set)
 
-        listbox_convidados = Listbox(self)
-        listbox_convidados.grid(row=2, column=1, sticky=('nsew'))
+    def add_button(self):
+        self.listbox_convidados.insert(END, self.namevar.get())
+        self.name_entry.delete(0, 'end')
+        
+    def remover_button(self):
+        self.listbox_convidados.delete(ANCHOR)
 
-        s = ttk.Scrollbar(listbox_convidados, orient=VERTICAL, command=listbox_convidados.yview)
-        listbox_convidados.configure(yscrollcommand=s.set)
-
-#    def add_button(self):
-#        listbox.insert(END, self.entry.get())
 
 class PaginaCarnes(ttk.Frame):
     
     def __init__(self, parent, controller):
         ttk.Frame.__init__(self, parent)
+        self.columnconfigure(1, minsize = 50)
         self.columnconfigure(2, minsize = 50)
         self.columnconfigure(3, minsize = 50)
         self.columnconfigure(4, minsize = 50)
         self.columnconfigure(5, minsize = 50)
-        label = ttk.Label(self, text="Carnes")
-        label.grid(row=0, column=2, sticky="nsew")
+        label = ttk.Label(self, text="Quais carnes você deseja")
+        label2 = ttk.Label(self, text="em seu churrasco?")
+        label.grid(row=0, column=1, sticky="nsew")
+        label2.grid(row=1, column=1, sticky="nsew")
                 
        #SCROLLBAR
         #s = ttk.Scrollbar(self, orient=VERTICAL, command=listbox.yview)
         #listbox.configure(yscrollcommand=s.set)
                 
         preçoc = ttk.Label(self, text = 'Preço')        
-        preçoc.grid(row=0, column=4, sticky = 'nsew')
+        preçoc.grid(row=0, column=3, sticky = 'nsew')
         
-        self.varc9 = IntVar()
-        carne9 = ttk.Label(self, text="Acém")
-        carne9.grid(row=1, column=2, sticky="nsew")
-        checkc9 = ttk.Checkbutton(self, variable=self.varc9)
-        checkc9.grid(row=1, column=3,sticky="nsew")
-        preçoc9 = ttk.Entry(self)
-        preçoc9.grid(column=4, row=1, sticky=("nsew")) 
+#        self.varc9 = IntVar()
+#        carne9 = ttk.Label(self, text="Acém")
+#        carne9.grid(row=1, column=1, sticky="nsew")
+#        checkc9 = ttk.Checkbutton(self, variable=self.varc9)
+#        checkc9.grid(row=1, column=2,sticky="nsew")
+#        preçoc9 = ttk.Entry(self)
+#        preçoc9.grid(column=3, row=1, sticky=("nsw")) 
         
         self.varc6 = IntVar()
         #self.varc6.set(0)
         carne6 = ttk.Label(self, text="Alcatra")
-        carne6.grid(row=2, column=2, sticky="nsew")
+        carne6.grid(row=2, column=1, sticky="nsew")
         checkc6 = ttk.Checkbutton(self, variable=self.varc6)
-        checkc6.grid(row=2, column=3,sticky="nsew")
+        checkc6.grid(row=2, column=2,sticky="nsew")
         
         self.varc12 = IntVar()
         #self.varc12.set(0)                
         carne12 = ttk.Label(self, text="Contra-Filé")
-        carne12.grid(row=3, column=2, sticky="nsew")
+        carne12.grid(row=3, column=1, sticky="nsew")
         checkc12 = ttk.Checkbutton(self, variable=self.varc12)
-        checkc12.grid(row=3, column=3,sticky="nsew")        
+        checkc12.grid(row=3, column=2,sticky="nsew")        
         
         self.varc11 = IntVar()
         #self.varc11.set(0)
         carne11 = ttk.Label(self, text="Coxão Duro")
-        carne11.grid(row=4, column=2, sticky="nsew")
+        carne11.grid(row=4, column=1, sticky="nsew")
         checkc11 = ttk.Checkbutton(self, variable=self.varc11)
-        checkc11.grid(row=4, column=3,sticky="nsew")        
+        checkc11.grid(row=4, column=2,sticky="nsew")        
         
         self.varc8 = IntVar()
         #self.varc8.set(0)
         carne8 = ttk.Label(self, text="Coxão Mole")
-        carne8.grid(row=5, column=2, sticky="nsew")
+        carne8.grid(row=5, column=1, sticky="nsew")
         checkc8 = ttk.Checkbutton(self,variable=self.varc8)
-        checkc8.grid(row=5, column=3,sticky="nsew")
+        checkc8.grid(row=5, column=2,sticky="nsew")
         
         self.varc5 = IntVar()
         #self.varc5.set(0)
         carne5 = ttk.Label(self, text="Cupim")
-        carne5.grid(row=6, column=2, sticky="nsew")
+        carne5.grid(row=6, column=1, sticky="nsew")
         checkc5 = ttk.Checkbutton(self, variable=self.varc5)
-        checkc5.grid(row=6, column=3,sticky="nsew")
+        checkc5.grid(row=6, column=2,sticky="nsew")
         
         self.varc2 = IntVar()
         #self.varc2.set(0)                        
         carne2 = ttk.Label(self, text="Filé Mignon")
-        carne2.grid(row=7, column=2, sticky="nsew")
+        carne2.grid(row=7, column=1, sticky="nsew")
         checkc2 = ttk.Checkbutton(self, variable=self.varc2)
-        checkc2.grid(row=7, column=3,sticky="nsew")
+        checkc2.grid(row=7, column=2,sticky="nsew")
         
         self.varc4 = IntVar()
         #self.varc4.set(0)
         carne4 = ttk.Label(self, text="Fraldinha")
-        carne4.grid(row=8, column=2, sticky="nsew")
+        carne4.grid(row=8, column=1, sticky="nsew")
         checkc4 = ttk.Checkbutton(self, variable=self.varc4)
-        checkc4.grid(row=8, column=3,sticky="nsew")
+        checkc4.grid(row=8, column=2,sticky="nsew")
         
         self.varc1 = IntVar()
         #self.varc1.set(0)
         carne1 = ttk.Label(self, text="Maminha")
-        carne1.grid(row=9, column=2, sticky="nsew")
+        carne1.grid(row=9, column=1, sticky="nsew")
         checkc1 = ttk.Checkbutton(self, variable=self.varc1)
-        checkc1.grid(row=9, column=3,sticky="nsew")
+        checkc1.grid(row=9, column=2,sticky="nsew")
         
         self.varc7 = IntVar()
         #self.varc7.set(0)        
         carne7 = ttk.Label(self, text="Patinho")
-        carne7.grid(row=10, column=2, sticky="nsew")
+        carne7.grid(row=10, column=1, sticky="nsew")
         checkc7 = ttk.Checkbutton(self, variable=self.varc7)
-        checkc7.grid(row=10, column=3,sticky="nsew")        
+        checkc7.grid(row=10, column=2,sticky="nsew")        
         
         self.varc3 = IntVar()
         #self.varc3.set(0)
         carne3 = ttk.Label(self, text="Picanha")
-        carne3.grid(row=11, column=2, sticky="nsew")
+        carne3.grid(row=11, column=1, sticky="nsew")
         checkc3 = ttk.Checkbutton(self, variable=self.varc3)
-        checkc3.grid(row=11, column=3,sticky="nsew")
+        checkc3.grid(row=11, column=2,sticky="nsew")
         
         self.varc10 = IntVar()
         #self.varc10.set(0)
         carne10 = ttk.Label(self, text="maminha")
-        carne10.grid(row=12, column=2, sticky="nsew")
+        carne10.grid(row=12, column=1, sticky="nsew")
         checkc10 = ttk.Checkbutton(self, variable=self.varc10)
-        checkc10.grid(row=12, column=3,sticky="nsew")
+        checkc10.grid(row=12, column=2,sticky="nsew")
         
         VoltarButton = ttk.Button(self, text='VOLTAR',
                                command=lambda: controller.mostrar_frame(PaginaMyBBQ))
