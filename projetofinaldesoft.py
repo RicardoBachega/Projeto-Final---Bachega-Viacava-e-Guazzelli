@@ -294,10 +294,34 @@ class PaginaBebidas(ttk.Frame):
         bebida4 = ttk.Label(self, text="")
         bebida4.grid(row=5, column=2, sticky="nsew")
         checkb4 = ttk.Checkbutton(self, variable=self.varb4)
-        checkb4.grid(row=5, column=3,sticky="nsew")       
+        checkb4.grid(row=5, column=3,sticky="nsew")   
+        
+        self.varb5 = IntVar()
+        bebida5 = ttk.Label(self, text="Cachaça")
+        bebida5.grid(row=5, column=2, sticky="nsew")
+        checkb5 = ttk.Checkbutton(self, variable=self.varb5)
+        checkb5.grid(row=5, column=3,sticky="nsew") 
         
         bebidas_nalcol = ttk.Label(self, text = 'NÃO ALCOÓLICAS')        
         bebidas_nalcol.grid(row=10, column=2, sticky = 'nsew')
+        
+        self.varb11 = IntVar()
+        bebida11 = ttk.Label(self, text="Coca-Cola")
+        bebida11.grid(row=11, column=2, sticky="nsew")
+        checkb11 = ttk.Checkbutton(self, variable=self.varb11)
+        checkb11.grid(row=11, column=3,sticky="nsew")
+        
+        self.varb12 = IntVar()
+        bebida12 = ttk.Label(self, text="Guaraná Antártica")
+        bebida12.grid(row=12, column=2, sticky="nsew")
+        checkb12 = ttk.Checkbutton(self, variable=self.varb12)
+        checkb12.grid(row=12, column=3,sticky="nsew")
+        
+        self.varb13 = IntVar()
+        bebida13 = ttk.Label(self, text="Água")
+        bebida13.grid(row=13, column=2, sticky="nsew")
+        checkb13 = ttk.Checkbutton(self, variable=self.varb13)
+        checkb13.grid(row=13, column=3,sticky="nsew")
         
         VoltarButton = ttk.Button(self, text='VOLTAR',
                                command=lambda: controller.mostrar_frame(PaginaMyBBQ))
