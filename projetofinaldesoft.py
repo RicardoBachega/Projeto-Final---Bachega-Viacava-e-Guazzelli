@@ -58,7 +58,7 @@ class BBQ(ttk.Frame):
         dicionario_convidados, dicionario_comidas, dicionario_bebidas = amz.leitura(base_dir)
         self.mostrar_frame(PaginaMyBBQ)
         print(dicionario_convidados)
-        
+
 class PaginaInicial(ttk.Frame):
     
     def __init__(self, parent, controller):
@@ -121,18 +121,24 @@ class PaginaParticipantes(ttk.Frame):
                                command=lambda: controller.mostrar_frame(PaginaMyBBQ))
         VoltarButton.grid(column=2, row=100, sticky=("nsew"))
 
-        AddButton = ttk.Button(self, text='Adicionar Convidado')
+        AddButton = ttk.Button(self, text='Adicionar Convidado')#, command=self.add_button)
         AddButton.grid(column=2, row=1, sticky=("nsew"))
         
-        self.namevar = StringVar()
-        name = ttk.Entry(self, textvariable = self.namevar)
+        namevar = StringVar()
+        name = ttk.Entry(self, textvariable=namevar)
         name.grid(column=1, row=1, sticky=("nsew"))  
+        
+        name.focus_set()
+        
 
         listbox_convidados = Listbox(self)
         listbox_convidados.grid(row=2, column=1, sticky=('nsew'))
 
         s = ttk.Scrollbar(listbox_convidados, orient=VERTICAL, command=listbox_convidados.yview)
         listbox_convidados.configure(yscrollcommand=s.set)
+
+#    def add_button(self):
+#        listbox.insert(END, self.entry.get())
 
 class PaginaCarnes(ttk.Frame):
     
