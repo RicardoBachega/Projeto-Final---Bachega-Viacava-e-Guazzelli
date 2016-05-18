@@ -1,9 +1,14 @@
 import armazenamento as amz
 import email
 
+<<<<<<< HEAD
+base_dir =  r"C:\Users\Henrique\Documents\DESOFT\Projeto-Final---Bachega-Viacava-e-Guazzelli"
+#base_dir = r"C:\Users\B155 FIRE V3\Documents\Projeto-Final---Bachega-Viacava-e-Guazzelli"
+=======
 #base_dir =  r"C:\Users\Henrique\Documents\DESOFT\Projeto-Final---Bachega-Viacava-e-Guazzelli"
 base_dir = r"C:\Users\B155 FIRE V3\Documents\Projeto-Final---Bachega-Viacava-e-Guazzelli"
 
+>>>>>>> 7fc18b4bdd70bb71987d38382247ae70bb17ea82
 from tkinter import *
 from tkinter import ttk
 
@@ -33,7 +38,7 @@ class BBQ(ttk.Frame):
         self.mainframe.columnconfigure(0, weight=1)
         self.mainframe.rowconfigure(0, weight=1)
         
-       # self.window.iconbitmap(self, default='beef2.ico')
+        self.window.iconbitmap(self, default='beef2.ico')
        
         self.frames = {}
         
@@ -70,6 +75,19 @@ class PaginaInicial(ttk.Frame):
     
     def __init__(self, parent, controller):
         ttk.Frame.__init__(self, parent)
+        self.rowconfigure(0, minsize=50)
+        self.rowconfigure(1, minsize=50)
+        self.rowconfigure(2, minsize=50)
+        self.rowconfigure(3, minsize=50)
+        self.rowconfigure(4, minsize=50)
+        self.rowconfigure(5, minsize=50)
+        self.rowconfigure(6, minsize=50)
+        self.rowconfigure(7, minsize=50)
+        self.columnconfigure(0, minsize=50)
+        self.columnconfigure(1, minsize=50)
+        self.columnconfigure(2, minsize=50)
+        self.columnconfigure(3, minsize=50)
+        self.columnconfigure(4, minsize=50)
         label = ttk.Label(self, text="")
         label.grid(row=0, column=2, sticky="nsew")
 
@@ -128,9 +146,12 @@ class PaginaParticipantes(ttk.Frame):
         VoltarButton = ttk.Button(self, text='VOLTAR',
                                command=lambda: controller.mostrar_frame(PaginaMyBBQ))
         VoltarButton.grid(column=2, row=100, sticky=("nsew"))
-
-        self.AddButton = ttk.Button(self, text='Adicionar Convidado', command=self.add_button)
-        self.AddButton.grid(column=2, row=1, sticky=("nsew"))
+        
+        #self.greenplus = PhotoImage(file='+verde.jpg')
+        self.AddMButton = ttk.Button(self, text='Adicionar Homem', command=self.add_button)
+        self.AddMButton.grid(column=2, row=1, sticky=("nsew"))
+        self.AddWButton = ttk.Button(self, text='Adicionar Mulher', command=self.add_button)
+        self.AddWButton.grid(column=3, row=1, sticky="nsew")
         
         #redX = PhotoImage(file='redX(1).jpg')
         removeButton = ttk.Button(self, text="Remover Convidado", command = self.remover_button)
@@ -153,7 +174,6 @@ class PaginaParticipantes(ttk.Frame):
         
     def remover_button(self):
         self.listbox_convidados.delete(ANCHOR)
-
 
 class PaginaCarnes(ttk.Frame):
     
@@ -308,6 +328,8 @@ class PaginaBebidas(ttk.Frame):
         checkb5 = ttk.Checkbutton(self, variable=self.varb5)
         checkb5.grid(row=5, column=3,sticky="nsew") 
         
+        espaço = ttk.Label(self,text = '')
+        espaço.grid(row=9, column=3, sticky='nsew')
         bebidas_nalcol = ttk.Label(self, text = 'NÃO ALCOÓLICAS')        
         bebidas_nalcol.grid(row=10, column=2, sticky = 'nsew')
         
