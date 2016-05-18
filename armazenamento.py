@@ -1,7 +1,7 @@
 import pickle
 
 #base_dir =  r"C:\Users\Henrique\Documents\DESOFT\Projeto-Final---Bachega-Viacava-e-Guazzelli"
-base_dir = r"C:\Users\B155 FIRE V3\Documents\Projeto-Final---Bachega-Viacava-e-Guazzelli"
+#base_dir = r"C:\Users\B155 FIRE V3\Documents\Projeto-Final---Bachega-Viacava-e-Guazzelli"
 
 def armazena(dicionario_comidas, dicionario_bebidas, dicionario_convidados, base_dir):
     
@@ -36,7 +36,7 @@ def leitura(base_dir):
 
     return convidados, comidas, bebidas
     
-def zera_dicionarios(dicionario_comidas, dicionario_bebidas, lista_convidados, lista_quantidades, base_dir):
+def zera_dicionarios(dicionario_comidas, dicionario_bebidas, dicionario_convidados, base_dir):
     
     dicionario_comidas = {"Picanha" : 0, "Fraldinha" : 0, "Maminha" : 0, "Alcatra" : 0}
     dicionario_bebidas = {"Vodka" : 0, "Tequila" : 0, "Whisky" : 0}
@@ -47,7 +47,21 @@ def zera_dicionarios(dicionario_comidas, dicionario_bebidas, lista_convidados, l
     return dicionario_comidas, dicionario_bebidas, dicionario_convidados
     
 def novo_churrasco(base_dir):
-    dicionario_convidados, dicionario_comidas, dicionario_bebidas, lista_quantidades = leitura(base_dir)
+    dicionario_convidados, dicionario_comidas, dicionario_bebidas = leitura(base_dir)
     zera_dicionarios(dicionario_comidas, dicionario_bebidas, dicionario_convidados, base_dir)
     
     return dicionario_convidados, dicionario_comidas, dicionario_bebidas
+    
+def calcula_quantidades(dicionario_convidados, dicionario_bebidas, dicionario_comidas, base_dir):
+    for i in range(len(dicionario_convidados)):
+        if dicionario_convidados[i] == 1:
+            for j in range(len(dicionario_comidas)):
+                dicionario_comidas[j] += 250/len(dicionario_comidas)
+            for j in range(len(dicionario_bebidas)):
+                dicionario_bebidas[j] += 250/len(dicionario_bebidas)
+        else:
+            for j in range(len(dicionario_comidas)):
+                dicionario_comidas[j] += 500/len(dicionario_comidas)
+            for j in range(len(dicionario_bebidas)):
+                dicionario_bebidas[j] += 500/len(dicionario_bebidas)
+    return dicionario_convidados, dicionario_comidas, dicionario_comidas
