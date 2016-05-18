@@ -32,7 +32,7 @@ class BBQ(ttk.Frame):
         self.mainframe.columnconfigure(0, weight=1)
         self.mainframe.rowconfigure(0, weight=1)
         
-        self.window.iconbitmap(self, default='beef2.ico')
+       # self.window.iconbitmap(self, default='beef2.ico')
        
         self.frames = {}
         
