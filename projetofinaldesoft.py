@@ -1,8 +1,14 @@
 import armazenamento as amz
 import email
 
+<<<<<<< HEAD
 base_dir =  r"C:\Users\Henrique\Documents\DESOFT\Projeto-Final---Bachega-Viacava-e-Guazzelli"
 #base_dir = r"C:\Users\B155 FIRE V3\Documents\Projeto-Final---Bachega-Viacava-e-Guazzelli"
+=======
+#base_dir =  r"C:\Users\Henrique\Documents\DESOFT\Projeto-Final---Bachega-Viacava-e-Guazzelli"
+base_dir = r"C:\Users\B155 FIRE V3\Documents\Projeto-Final---Bachega-Viacava-e-Guazzelli"
+
+>>>>>>> 7fc18b4bdd70bb71987d38382247ae70bb17ea82
 from tkinter import *
 from tkinter import ttk
 
@@ -59,7 +65,6 @@ class BBQ(ttk.Frame):
         dicionario_convidados, dicionario_comidas, dicionario_bebidas = amz.leitura(base_dir)
         self.mostrar_frame(PaginaMyBBQ)
 
-        
     def salvar_e_fechar(self, base_dir):
         dicionario_convidados, dicionario_comidas, dicionario_bebidas = amz.leitura(base_dir)
         amz.armazena(dicionario_comidas, dicionario_bebidas, dicionario_convidados, base_dir)
