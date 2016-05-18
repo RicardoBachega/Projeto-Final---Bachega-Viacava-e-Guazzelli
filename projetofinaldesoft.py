@@ -1,14 +1,11 @@
 import armazenamento as amz
 import email
 
-<<<<<<< HEAD
+
 base_dir =  r"C:\Users\Henrique\Documents\DESOFT\Projeto-Final---Bachega-Viacava-e-Guazzelli"
 #base_dir = r"C:\Users\B155 FIRE V3\Documents\Projeto-Final---Bachega-Viacava-e-Guazzelli"
-=======
-#base_dir =  r"C:\Users\Henrique\Documents\DESOFT\Projeto-Final---Bachega-Viacava-e-Guazzelli"
-base_dir = r"C:\Users\B155 FIRE V3\Documents\Projeto-Final---Bachega-Viacava-e-Guazzelli"
 
->>>>>>> 7fc18b4bdd70bb71987d38382247ae70bb17ea82
+
 from tkinter import *
 from tkinter import ttk
 
@@ -86,12 +83,14 @@ class PaginaInicial(ttk.Frame):
         self.columnconfigure(0, minsize=50)
         self.columnconfigure(1, minsize=50)
         self.columnconfigure(2, minsize=50)
-        self.columnconfigure(3, minsize=50)
+        self.columnconfigure(3, minsize=100)
         self.columnconfigure(4, minsize=50)
+        self.columnconfigure(5, minsize=50)
+        
         label = ttk.Label(self, text="")
-        label.grid(row=0, column=2, sticky="nsew")
+        label.grid(row=3, column=3, sticky="nsew")
 
-        nbbqbutton = ttk.Button(self, text='GERENCIAR CHURRASCO', style = 'NuclearReactor.TButton',
+        nbbqbutton = ttk.Button(self, text='GERENCIAR CHURRASCO',
                                command=lambda: controller.botao_gerenciar_churrasco(self))
 
         nbbqbutton.grid(column=2, row=1, sticky=("nsew"))
