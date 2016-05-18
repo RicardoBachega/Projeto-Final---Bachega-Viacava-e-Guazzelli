@@ -1,6 +1,9 @@
 import pickle
 
-def armazena(dicionario_comidas, dicionario_bebidas, dicionario_convidados, base_dir):
+#base_dir =  r"C:\Users\Henrique\Documents\DESOFT\Projeto-Final---Bachega-Viacava-e-Guazzelli"
+base_dir = r"C:\Users\B155 FIRE V3\Documents\Projeto-Final---Bachega-Viacava-e-Guazzelli"
+
+def armazena(dicionario_comidas, dicionario_bebidas, lista_convidados, lista_quantidades, base_dir):
     
     filename = base_dir + r"\arquivo_comidas.dados"
     fileobj = open(filename, 'wb')    
@@ -14,9 +17,14 @@ def armazena(dicionario_comidas, dicionario_bebidas, dicionario_convidados, base
     
     filename = base_dir + r"\arquivo_convidados.dados"
     fileobj = open(filename, 'wb')    
-    pickle.dump(dicionario_convidados, fileobj)    
+    pickle.dump(lista_convidados, fileobj)    
     fileobj.close()
 
+    filename = base_dir + r"\arquivo_convidados.dados"
+    fileobj = open(filename, 'wb')    
+    pickle.dump(lista_quantidades, fileobj)    
+    fileobj.close()
+    
 def leitura(base_dir):
     
     filename = base_dir + r"\arquivo_convidados.dados"
@@ -31,20 +39,25 @@ def leitura(base_dir):
     fileobj = open(filename, 'rb')
     bebidas = pickle.load(fileobj)
     
-    return convidados, comidas, bebidas
+    filename = base_dir + r"\arquivo_quantidades.dados"    
+    fileobj = open(filename, 'rb')
+    quantidades = pickle.load(fileobj)
+
+    return convidados, comidas, bebidas, quantidades
     
-def zera_dicionarios(dicionario_comidas, dicionario_bebidas, dicionario_convidados, base_dir):
+def zera_dicionarios(dicionario_comidas, dicionario_bebidas, lista_convidados, lista_quantidades, base_dir):
     
     dicionario_comidas = {"Picanha" : 0, "Fraldinha" : 0, "Maminha" : 0, "Alcatra" : 0}
     dicionario_bebidas = {"Vodka" : 0, "Tequila" : 0, "Whisky" : 0}
-    dicionario_convidados = {}
+    lista_convidados = []
+    lista_quantidades = []
     
-    armazena(dicionario_comidas, dicionario_bebidas, dicionario_convidados, base_dir)
+    armazena(dicionario_comidas, dicionario_bebidas, lista_convidados, lista_quantidades, base_dir)
     
-    return dicionario_comidas, dicionario_bebidas, dicionario_convidados
+    return dicionario_comidas, dicionario_bebidas, lista_convidados, lista_quantidades
     
 def novo_churrasco(base_dir):
-    dicionario_convidados, dicionario_comidas, dicionario_bebidas = leitura(base_dir)
-    zera_dicionarios(dicionario_comidas, dicionario_bebidas, dicionario_convidados, base_dir)
+    dicionario_convidados, dicionario_comidas, dicionario_bebidas, lista_quantidades = leitura(base_dir)
+    zera_dicionarios(dicionario_comidas, dicionario_bebidas, dicionario_convidados, lista_quantidades, base_dir)
     
-    return dicionario_convidados, dicionario_comidas, dicionario_bebidas
+    return dicionario_convidados, dicionario_comidas, dicionario_bebidas, lista_quantidades
