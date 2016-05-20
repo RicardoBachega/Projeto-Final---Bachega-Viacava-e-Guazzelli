@@ -1,6 +1,6 @@
 import pickle
 
-#base_dir =  r"C:\Users\Henrique\Documents\DESOFT\Projeto-Final---Bachega-Viacava-e-Guazzelli"
+base_dir =  r"C:\Users\Henrique\Documents\DESOFT\Projeto-Final---Bachega-Viacava-e-Guazzelli"
 #base_dir = r"C:\Users\B155 FIRE V3\Documents\Projeto-Final---Bachega-Viacava-e-Guazzelli"
 
 def armazena(dicionario_comidas, dicionario_bebidas, dicionario_convidados, base_dir):
@@ -38,7 +38,7 @@ def leitura(base_dir):
     
 def zera_dicionarios(dicionario_comidas, dicionario_bebidas, dicionario_convidados, base_dir):
     
-    dicionario_comidas = {"Picanha" : 0, "Fraldinha" : 0, "Maminha" : 0, "Alcatra" : 0}
+    dicionario_comidas = {"Picanha" : 0, "Maminha" : 0, "Fraldinha" : 0, "Contra-filé" : 0, "Alcatra": 0, "Coração de frango": 0, "Linguiça": 0}
     dicionario_bebidas = {"Vodka" : 0, "Tequila" : 0, "Whisky" : 0}
     dicionario_convidados = {}
     
@@ -53,15 +53,21 @@ def novo_churrasco(base_dir):
     return dicionario_convidados, dicionario_comidas, dicionario_bebidas
     
 def calcula_quantidades(dicionario_convidados, dicionario_bebidas, dicionario_comidas, base_dir):
-    for i in range(len(dicionario_convidados)):
-        if dicionario_convidados[i] == 1:
-            for j in range(len(dicionario_comidas)):
-                dicionario_comidas[j] += 250/len(dicionario_comidas)
-            for j in range(len(dicionario_bebidas)):
-                dicionario_bebidas[j] += 250/len(dicionario_bebidas)
+    for key,value in dicionario_convidados:
+        if value == 1:            
+            dicionario_comidas["Picanha"] += 250/len(dicionario_comidas)
+            dicionario_comidas["Maminha"] += 250/len(dicionario_comidas)
+            dicionario_comidas["Fraldinha"] += 250/len(dicionario_comidas)
+            dicionario_comidas["Contra-filé"] += 250/len(dicionario_comidas)
+            dicionario_comidas["Alcatra"] += 250/len(dicionario_comidas)
+            dicionario_comidas["Coração de frango"] += 250/len(dicionario_comidas)
+            dicionario_comidas["Linguiça"] += 250/len(dicionario_comidas)
         else:
-            for j in range(len(dicionario_comidas)):
-                dicionario_comidas[j] += 500/len(dicionario_comidas)
-            for j in range(len(dicionario_bebidas)):
-                dicionario_bebidas[j] += 500/len(dicionario_bebidas)
+            dicionario_comidas["Picanha"] += 500/len(dicionario_comidas)
+            dicionario_comidas["Maminha"] += 500/len(dicionario_comidas)
+            dicionario_comidas["Fraldinha"] += 500/len(dicionario_comidas)
+            dicionario_comidas["Contra-filé"] += 500/len(dicionario_comidas)
+            dicionario_comidas["Alcatra"] += 500/len(dicionario_comidas)
+            dicionario_comidas["Coração de frango"] += 500/len(dicionario_comidas)
+            dicionario_comidas["Linguiça"] += 500/len(dicionario_comidas)
     return dicionario_convidados, dicionario_comidas, dicionario_comidas
