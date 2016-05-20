@@ -1,7 +1,7 @@
 import armazenamento as amz
 import email
 
-base_dir =  r"C:\Users\Henrique\Documents\DESOFT\Projeto-Final---Bachega-Viacava-e-Guazzelli"
+#base_dir =  r"C:\Users\Henrique\Documents\DESOFT\Projeto-Final---Bachega-Viacava-e-Guazzelli"
 #base_dir = r"C:\Users\B155 FIRE V3\Documents\Projeto-Final---Bachega-Viacava-e-Guazzelli"
 
 from tkinter import *
@@ -61,7 +61,7 @@ class BBQ(ttk.Frame):
         if self.yesorno == True:
             dicionario_convidados, dicionario_comidas, dicionario_bebidas = amz.novo_churrasco(base_dir)
             self.mostrar_frame(PaginaMyBBQ)
-            print(PaginaCarnes.self.varc1)
+            print(self.PaginaCarnes.varc1)
             
     
     def pergunta_se_apaga(self):
