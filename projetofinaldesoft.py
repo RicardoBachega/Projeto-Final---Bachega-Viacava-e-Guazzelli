@@ -2,7 +2,8 @@ import armazenamento as amz
 import email
 
 #base_dir =  r"C:\Users\Henrique\Documents\DESOFT\Projeto-Final---Bachega-Viacava-e-Guazzelli"
-base_dir = r"C:\Users\B155 FIRE V3\Documents\Projeto-Final---Bachega-Viacava-e-Guazzelli"
+#base_dir = r"C:\Users\B155 FIRE V3\Documents\Projeto-Final---Bachega-Viacava-e-Guazzelli"
+
 
 from tkinter import *
 from tkinter import ttk
@@ -65,6 +66,9 @@ class BBQ(ttk.Frame):
     
     def pergunta_se_apaga(self):
         self.yesorno = messagebox.askyesno("", "Se você continuar, todos os dados serão apagados. \n Tem certeza de que deseja continuar?")
+
+    def enviar_email(self):
+        envia_email(dicionario_convidados + dicionario_bebidas + dicionario_comidas, "ricardo.n.b@hotmail.com")
 
 class PaginaInicial(ttk.Frame):
     
