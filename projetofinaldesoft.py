@@ -57,13 +57,15 @@ class BBQ(ttk.Frame):
         self.mostrar_frame(PaginaRelatorio)
 
     def botao_novo_churrasco(self, cont):
-        pergunta_se_apaga(self)
-        if yesorno == True:    
+        self.pergunta_se_apaga()
+        if self.yesorno == True:
             dicionario_convidados, dicionario_comidas, dicionario_bebidas = amz.novo_churrasco(base_dir)
             self.mostrar_frame(PaginaMyBBQ)
+            print(PaginaCarnes.self.varc1)
+            
     
     def pergunta_se_apaga(self):
-        yesorno = messagebox.askyesno("", "Se você continuar, todos os dados serão apagados. \n Tem certeza de que deseja continuar?")
+        self.yesorno = messagebox.askyesno("", "Se você continuar, todos os dados serão apagados. \n Tem certeza de que deseja continuar?")
 
 class PaginaInicial(ttk.Frame):
     
@@ -96,7 +98,7 @@ class PaginaInicial(ttk.Frame):
         nbbqbutton.grid(column=2, row=2, sticky=("nsew"))
         
         ebbqbutton = ttk.Button(self, text='NOVO CHURRASCO',
-                               command=lambda: controller.pergunta_se_apaga())
+                               command=lambda: controller.botao_novo_churrasco(self))
         ebbqbutton.grid(column=2, row=1, sticky=("nsew"))
         
 class PaginaMyBBQ(ttk.Frame):
@@ -212,7 +214,7 @@ class PaginaCarnes(ttk.Frame):
         self.columnconfigure(3, minsize = 50)
         self.columnconfigure(4, minsize = 50)
         self.columnconfigure(5, minsize = 50)
-        label = ttk.Label(self, text="Quais carnes você deseja em seu churrasco?")
+        label = ttk.Label(self, text="Selecione as carnes que \n você deseja em seu churrasco")
         label.grid(row=0, column=1, sticky="nsew")
                 
        #SCROLLBAR
@@ -268,7 +270,7 @@ class PaginaBebidas(ttk.Frame):
     
     def __init__(self, parent, controller):
         ttk.Frame.__init__(self, parent)
-        label = ttk.Label(self, text="BEBIDAS")
+        label = ttk.Label(self, text="Selecione as bebidas que \n você deseja em seu churrasco")
         label.grid(row=0, column=2, sticky="nsew")
         
         bebidas_alcol = ttk.Label(self, text = 'ALCOÓLICAS')        
