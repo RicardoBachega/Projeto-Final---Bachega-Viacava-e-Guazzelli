@@ -32,7 +32,7 @@ class BBQ(ttk.Frame):
             frame.grid(row=0, column=0, sticky="nsew")
             
         self.mostrar_frame(PaginaInicial)            
-    
+
 
     def mostrar_frame(self, cont):
         frame = self.frames[cont]
@@ -61,7 +61,6 @@ class BBQ(ttk.Frame):
         if self.yesorno == True:
             dicionario_convidados, dicionario_comidas, dicionario_bebidas = amz.novo_churrasco(base_dir)
             self.mostrar_frame(PaginaMyBBQ)
-            print(self.PaginaCarnes.varc1)
             
     
     def pergunta_se_apaga(self):
