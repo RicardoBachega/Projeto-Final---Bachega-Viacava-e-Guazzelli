@@ -13,22 +13,22 @@ class BBQ(ttk.Frame):
         #janela inicial
         self.window = Tk()
         self.window.title("           BBQ")
-        self.window.geometry("400x350+100+100")
-        self.window.rowconfigure(0, minsize=50)
-        self.window.rowconfigure(1, minsize=50)
-        self.window.rowconfigure(2, minsize=50)
-        self.window.rowconfigure(3, minsize=50)
-        self.window.rowconfigure(4, minsize=50)
-        self.window.rowconfigure(5, minsize=50)
-        self.window.rowconfigure(6, minsize=50)
-        self.window.rowconfigure(7, minsize=50)
-        self.window.columnconfigure(0, minsize=50)
-        self.window.columnconfigure(1, minsize=50)
-        self.window.columnconfigure(2, minsize=50)
-        self.window.columnconfigure(3, minsize=50)
-        self.window.columnconfigure(4, minsize=50)
+        self.window.geometry("360x301+100+100")
+#        self.window.rowconfigure(0, minsize=50)
+#        self.window.rowconfigure(1, minsize=50)
+#        self.window.rowconfigure(2, minsize=50)
+#        self.window.rowconfigure(3, minsize=50)
+#        self.window.rowconfigure(4, minsize=50)
+#        self.window.rowconfigure(5, minsize=50)
+#        self.window.rowconfigure(6, minsize=50)
+#        self.window.rowconfigure(7, minsize=50)
+#        self.window.columnconfigure(0, minsize=50)
+#        self.window.columnconfigure(1, minsize=50)
+#        self.window.columnconfigure(2, minsize=50)
+#        self.window.columnconfigure(3, minsize=50)
+#        self.window.columnconfigure(4, minsize=50)
         
-        self.mainframe = ttk.Frame(self.window, padding = "3 3 12 12")
+        self.mainframe = ttk.Frame(self.window)
         self.mainframe.grid(column=0, row=0, sticky=("nsew"))
         self.mainframe.columnconfigure(0, weight=1)
         self.mainframe.rowconfigure(0, weight=1)
@@ -45,16 +45,13 @@ class BBQ(ttk.Frame):
             
         self.mostrar_frame(PaginaInicial)            
     
+
     def mostrar_frame(self, cont):
         frame = self.frames[cont]
         frame.tkraise()    
     
     def iniciar(self):
         self.window.mainloop()   
-    
-    def botao_novo_churrasco(self, cont):
-        dicionario_convidados, dicionario_comidas, dicionario_bebidas = amz.novo_churrasco(base_dir)
-        self.mostrar_frame(PaginaMyBBQ)
     
     def botao_gerenciar_churrasco(self, cont):
         dicionario_convidados, dicionario_comidas, dicionario_bebidas = amz.leitura(base_dir)
@@ -68,9 +65,19 @@ class BBQ(ttk.Frame):
     def mostrar_pagina_relatorio(self, cont):
         dicionario_convidados, dicionario_comidas, dicionario_bebidas = amz.leitura(base_dir)
         dicionario_convidados, dicionario_comidas, dicionario_bebidas = amz.calcula_quantidades(dicionario_convidados, dicionario_bebidas, dicionario_comidas, base_dir)
-        armazena(dicionario_comidas, dicionario_bebidas, dicionario_convidados, base_dir)
+        amz.armazena(dicionario_comidas, dicionario_bebidas, dicionario_convidados, base_dir)
         self.mostrar_frame(PaginaRelatorio)
 
+    def botao_novo_churrasco(self, cont):
+        dicionario_convidados, dicionario_comidas, dicionario_bebidas = amz.novo_churrasco(base_dir)
+#        varc1.set(0)
+#        varc2.set(0)
+#        varc3.set(0)
+#        varc4.set(0)
+#        varc5.set(0)
+#        varc6.set(0)
+        self.mostrar_frame(PaginaMyBBQ)
+    
 
 class PaginaInicial(ttk.Frame):
     
@@ -91,8 +98,22 @@ class PaginaInicial(ttk.Frame):
         self.columnconfigure(4, minsize=50)
         self.columnconfigure(5, minsize=50)
         
-        label = ttk.Label(self, text="")
-        label.grid(row=3, column=3, sticky="nsew")
+#        image = PhotoImage(file='bg1.gif')
+#        image1 = ImageTk.PhotoImage(image)
+        
+        label = ttk.Label(self, text='')
+        label.grid(row=0, column=0, sticky="nsew")
+
+#    def botao_novo_churrasco(self, cont):
+#        dicionario_convidados, dicionario_comidas, dicionario_bebidas = amz.novo_churrasco(base_dir)
+#        PaginaCarnes.varc1.set(0)
+#        PaginaCarnes.varc2.set(0)
+#        PaginaCarnes.varc3.set(0)
+#        PaginaCarnes.varc4.set(0)
+#        PaginaCarnes.varc5.set(0)
+#        PaginaCarnes.varc6.set(0)
+#        self.mostrar_frame(PaginaMyBBQ)
+    
 
         nbbqbutton = ttk.Button(self, text='GERENCIAR CHURRASCO',
                                command=lambda: controller.botao_gerenciar_churrasco(self))
@@ -107,8 +128,21 @@ class PaginaMyBBQ(ttk.Frame):
     
     def __init__(self, parent, controller):
         ttk.Frame.__init__(self, parent)
-        label = ttk.Label(self, text="Meu Churrasco")
-        label.grid(row=0, column=2, sticky="nsew")
+        self.rowconfigure(1, minsize=50)
+        self.rowconfigure(2, minsize=50)
+        self.rowconfigure(3, minsize=50)
+        self.rowconfigure(4, minsize=50)
+        self.rowconfigure(5, minsize=50)
+        self.rowconfigure(6, minsize=50)
+        self.columnconfigure(0, minsize=50)
+        self.columnconfigure(1, minsize=70)
+        self.columnconfigure(2, minsize=50)
+        self.columnconfigure(3, minsize=100)
+        self.columnconfigure(4, minsize=50)
+        self.columnconfigure(5, minsize=50)
+        
+#        label = ttk.Label(self, text="Meu Churrasco")
+#        label.grid(row=0, column=2, sticky="nsew")
         
         #botao dos que acessa os CONVIDADOS
         participantesButton = ttk.Button(self, text='CONVIDADOS',
@@ -123,12 +157,7 @@ class PaginaMyBBQ(ttk.Frame):
         #botao da lista de BEBIDAS
         bebidasButton = ttk.Button(self, text='BEBIDAS',
                                command=lambda: controller.mostrar_frame(PaginaBebidas))
-        bebidasButton.grid(column=2, row=3, sticky=("nsew")) 
-
-        #botao que volta a pagina inicial
-        PIbutton = ttk.Button(self, text='menu inicial',
-                               command=lambda: controller.mostrar_frame(PaginaInicial))
-        PIbutton.grid(column=2, row=6, sticky=("nsew"))        
+        bebidasButton.grid(column=2, row=3, sticky=("nsew"))        
 
         relatórioButton = ttk.Button(self, text='RELATÓRIO',
                                command=lambda: controller.mostrar_pagina_relatorio(PaginaRelatorio))
@@ -137,6 +166,11 @@ class PaginaMyBBQ(ttk.Frame):
         saveexitButton = ttk.Button(self, text='SALVAR E FECHAR',
                                command=lambda: controller.salvar_e_fechar(base_dir))
         saveexitButton.grid(column=2, row=5, sticky=("nsew"))
+    
+        #botao que volta a pagina inicial
+        PIbutton = ttk.Button(self, text='menu inicial',
+                               command=lambda: controller.mostrar_frame(PaginaInicial))
+        PIbutton.grid(column=2, row=6, sticky=("nsew"))     
     
     def mostrar_pagina_participantes(self, cont):
         dicionario_convidados, dicionario_comidas, dicionario_bebidas = amz.leitura(base_dir)
@@ -203,10 +237,8 @@ class PaginaCarnes(ttk.Frame):
         self.columnconfigure(3, minsize = 50)
         self.columnconfigure(4, minsize = 50)
         self.columnconfigure(5, minsize = 50)
-        label = ttk.Label(self, text="Quais carnes você deseja")
-        label2 = ttk.Label(self, text="em seu churrasco?")
+        label = ttk.Label(self, text="Quais carnes você deseja em seu churrasco?")
         label.grid(row=0, column=1, sticky="nsew")
-        label2.grid(row=1, column=1, sticky="nsew")
                 
        #SCROLLBAR
         #s = ttk.Scrollbar(self, orient=VERTICAL, command=listbox.yview)
@@ -215,59 +247,47 @@ class PaginaCarnes(ttk.Frame):
         preçoc = ttk.Label(self, text = 'Preço')        
         preçoc.grid(row=0, column=3, sticky = 'nsew')
         
-#        self.varc9 = IntVar()
-#        carne9 = ttk.Label(self, text="Acém")
-#        carne9.grid(row=1, column=1, sticky="nsew")
-#        checkc9 = ttk.Checkbutton(self, variable=self.varc9)
-#        checkc9.grid(row=1, column=2,sticky="nsew")
-#        preçoc9 = ttk.Entry(self)
-#        preçoc9.grid(column=3, row=1, sticky=("nsw")) 
+        self.varc1 = IntVar()
+        carne1 = ttk.Label(self, text="Picanha")
+        carne1.grid(row=2, column=1, sticky="nsew")
+        checkc1 = ttk.Checkbutton(self, variable=self.varc1)
+        checkc1.grid(row=2, column=2,sticky="nsew")
         
-        self.varc6 = IntVar()
-        #self.varc6.set(0)
-        carne6 = ttk.Label(self, text="Picanha")
-        carne6.grid(row=2, column=1, sticky="nsew")
-        checkc6 = ttk.Checkbutton(self, variable=self.varc6)
-        checkc6.grid(row=2, column=2,sticky="nsew")
+        self.varc2 = IntVar()                
+        carne2 = ttk.Label(self, text="Fraldinha")
+        carne2.grid(row=3, column=1, sticky="nsew")
+        checkc2 = ttk.Checkbutton(self, variable=self.varc2)
+        checkc2.grid(row=3, column=2,sticky="nsew")        
         
-        self.varc12 = IntVar()
-        #self.varc12.set(0)                
-        carne12 = ttk.Label(self, text="Fraldinha")
-        carne12.grid(row=3, column=1, sticky="nsew")
-        checkc12 = ttk.Checkbutton(self, variable=self.varc12)
-        checkc12.grid(row=3, column=2,sticky="nsew")        
+        self.varc3 = IntVar()
+        carne3 = ttk.Label(self, text="Maminha")
+        carne3.grid(row=4, column=1, sticky="nsew")
+        checkc3 = ttk.Checkbutton(self, variable=self.varc3)
+        checkc3.grid(row=4, column=2,sticky="nsew")        
         
-        self.varc11 = IntVar()
-        #self.varc11.set(0)
-        carne11 = ttk.Label(self, text="Maminha")
-        carne11.grid(row=4, column=1, sticky="nsew")
-        checkc11 = ttk.Checkbutton(self, variable=self.varc11)
-        checkc11.grid(row=4, column=2,sticky="nsew")        
-        
-        self.varc8 = IntVar()
-        #self.varc8.set(0)
-        carne8 = ttk.Label(self, text="Contra-filé")
-        carne8.grid(row=5, column=1, sticky="nsew")
-        checkc8 = ttk.Checkbutton(self,variable=self.varc8)
-        checkc8.grid(row=5, column=2,sticky="nsew")
+        self.varc4 = IntVar()
+        carne4 = ttk.Label(self, text="Contra-filé")
+        carne4.grid(row=5, column=1, sticky="nsew")
+        checkc4 = ttk.Checkbutton(self,variable=self.varc4)
+        checkc4.grid(row=5, column=2,sticky="nsew")
         
         self.varc5 = IntVar()
-        #self.varc5.set(0)
         carne5 = ttk.Label(self, text="Linguiça")
         carne5.grid(row=6, column=1, sticky="nsew")
         checkc5 = ttk.Checkbutton(self, variable=self.varc5)
         checkc5.grid(row=6, column=2,sticky="nsew")
         
-        self.varc2 = IntVar()
-        #self.varc2.set(0)                        
-        carne2 = ttk.Label(self, text="Coração de frango")
-        carne2.grid(row=7, column=1, sticky="nsew")
-        checkc2 = ttk.Checkbutton(self, variable=self.varc2)
-        checkc2.grid(row=7, column=2,sticky="nsew")
+        self.varc6 = IntVar()                                
+        carne6 = ttk.Label(self, text="Coração de frango")
+        carne6.grid(row=7, column=1, sticky="nsew")
+        checkc6 = ttk.Checkbutton(self, variable=self.varc6)
+        checkc6.grid(row=7, column=2,sticky="nsew")
         
         VoltarButton = ttk.Button(self, text='VOLTAR',
                                command=lambda: controller.mostrar_frame(PaginaMyBBQ))
         VoltarButton.grid(column=3, row=100, sticky=("nsew"))
+        
+        
         
 class PaginaBebidas(ttk.Frame):
     
@@ -317,23 +337,23 @@ class PaginaBebidas(ttk.Frame):
         bebidas_nalcol = ttk.Label(self, text = 'NÃO ALCOÓLICAS')        
         bebidas_nalcol.grid(row=10, column=2, sticky = 'nsew')
         
-        self.varb11 = IntVar()
-        bebida11 = ttk.Label(self, text="Coca-Cola")
-        bebida11.grid(row=11, column=2, sticky="nsew")
-        checkb11 = ttk.Checkbutton(self, variable=self.varb11)
-        checkb11.grid(row=11, column=3,sticky="nsew")
+        self.varbn1 = IntVar()
+        bebidab1 = ttk.Label(self, text="Coca-Cola")
+        bebidab1.grid(row=11, column=2, sticky="nsew")
+        checkbb1 = ttk.Checkbutton(self, variable=self.varbn1)
+        checkbb1.grid(row=11, column=3,sticky="nsew")
         
-        self.varb12 = IntVar()
-        bebida12 = ttk.Label(self, text="Guaraná Antártica")
-        bebida12.grid(row=12, column=2, sticky="nsew")
-        checkb12 = ttk.Checkbutton(self, variable=self.varb12)
-        checkb12.grid(row=12, column=3,sticky="nsew")
+        self.varbn2 = IntVar()
+        bebidab2 = ttk.Label(self, text="Guaraná Antártica")
+        bebidab2.grid(row=12, column=2, sticky="nsew")
+        checkbb2 = ttk.Checkbutton(self, variable=self.varbn2)
+        checkbb2.grid(row=12, column=3,sticky="nsew")
         
-        self.varb13 = IntVar()
-        bebida13 = ttk.Label(self, text="Água")
-        bebida13.grid(row=13, column=2, sticky="nsew")
-        checkb13 = ttk.Checkbutton(self, variable=self.varb13)
-        checkb13.grid(row=13, column=3,sticky="nsew")
+        self.varbn3 = IntVar()
+        bebidab3 = ttk.Label(self, text="Água")
+        bebidab3.grid(row=13, column=2, sticky="nsew")
+        checkbb3 = ttk.Checkbutton(self, variable=self.varbn3)
+        checkbb3.grid(row=13, column=3,sticky="nsew")
         
         VoltarButton = ttk.Button(self, text='VOLTAR',
                                command=lambda: controller.mostrar_frame(PaginaMyBBQ))
