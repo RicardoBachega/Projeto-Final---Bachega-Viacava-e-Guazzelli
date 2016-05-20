@@ -3,6 +3,7 @@ import email
 
 #base_dir =  r"C:\Users\Henrique\Documents\DESOFT\Projeto-Final---Bachega-Viacava-e-Guazzelli"
 #base_dir = r"C:\Users\B155 FIRE V3\Documents\Projeto-Final---Bachega-Viacava-e-Guazzelli"
+base_dir =  r"C:\Users\RICARDO\Documents\GitHub\Projeto-Final---Bachega-Viacava-e-Guazzelli"
 
 from tkinter import *
 from tkinter import ttk
@@ -77,7 +78,9 @@ class BBQ(ttk.Frame):
 #        varc5.set(0)
 #        varc6.set(0)
         self.mostrar_frame(PaginaMyBBQ)
-    
+        
+    def enviar_email(self):
+        envia_email(dicionario_convidados + dicionario_bebidas + dicionario_comidas, "ricardo.n.b@hotmail.com")
 
 class PaginaInicial(ttk.Frame):
     
