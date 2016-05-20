@@ -1,7 +1,7 @@
 import armazenamento as amz
 import email
 
-#base_dir =  r"C:\Users\Henrique\Documents\DESOFT\Projeto-Final---Bachega-Viacava-e-Guazzelli"
+base_dir =  r"C:\Users\Henrique\Documents\DESOFT\Projeto-Final---Bachega-Viacava-e-Guazzelli"
 #base_dir = r"C:\Users\B155 FIRE V3\Documents\Projeto-Final---Bachega-Viacava-e-Guazzelli"
 
 from tkinter import *
@@ -60,8 +60,8 @@ class BBQ(ttk.Frame):
         self.pergunta_se_apaga()
         if self.yesorno == True:
             dicionario_convidados, dicionario_comidas, dicionario_bebidas = amz.novo_churrasco(base_dir)
-            self.mostrar_frame(PaginaMyBBQ)
-            
+            self.frames[PaginaCarnes].zerar_checkbuttons()
+            self.mostrar_frame(PaginaMyBBQ)           
     
     def pergunta_se_apaga(self):
         self.yesorno = messagebox.askyesno("", "Se você continuar, todos os dados serão apagados. \n Tem certeza de que deseja continuar?")
@@ -216,10 +216,6 @@ class PaginaCarnes(ttk.Frame):
         label = ttk.Label(self, text="Selecione as carnes que \n você deseja em seu churrasco")
         label.grid(row=0, column=1, sticky="nsew")
                 
-       #SCROLLBAR
-        #s = ttk.Scrollbar(self, orient=VERTICAL, command=listbox.yview)
-        #listbox.configure(yscrollcommand=s.set)
-                
         preçoc = ttk.Label(self, text = 'Preço')        
         preçoc.grid(row=1, column=3, sticky = 'nsew')
         
@@ -263,6 +259,13 @@ class PaginaCarnes(ttk.Frame):
                                command=lambda: controller.mostrar_frame(PaginaMyBBQ))
         VoltarButton.grid(column=3, row=100, sticky=("nsew"))
         
+    def zerar_checkbuttons(self):
+        self.varc1.set(0)
+        self.varc2.set(0)
+        self.varc3.set(0)
+        self.varc4.set(0)
+        self.varc5.set(0)
+        self.varc6.set(0)
         
         
 class PaginaBebidas(ttk.Frame):

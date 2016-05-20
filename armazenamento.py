@@ -1,6 +1,6 @@
 import pickle
 
-#base_dir =  r"C:\Users\Henrique\Documents\DESOFT\Projeto-Final---Bachega-Viacava-e-Guazzelli"
+base_dir =  r"C:\Users\Henrique\Documents\DESOFT\Projeto-Final---Bachega-Viacava-e-Guazzelli"
 #base_dir = r"C:\Users\B155 FIRE V3\Documents\Projeto-Final---Bachega-Viacava-e-Guazzelli"
 
 def armazena(dicionario_comidas, dicionario_bebidas, dicionario_convidados, base_dir):
@@ -38,7 +38,7 @@ def leitura(base_dir):
     
 def zera_dicionarios(dicionario_comidas, dicionario_bebidas, dicionario_convidados, base_dir):
     
-    dicionario_comidas = {"Picanha" : 0, "Fraldinha" : 0, "Maminha" : 0, "Alcatra" : 0}
+    dicionario_comidas = {"Picanha" : 0, "Maminha" : 0, "Fraldinha" : 0, "Contra-filé" : 0, "Alcatra": 0, "Coração de frango": 0, "Linguiça": 0}
     dicionario_bebidas = {"Vodka" : 0, "Tequila" : 0, "Whisky" : 0}
     dicionario_convidados = {}
     
