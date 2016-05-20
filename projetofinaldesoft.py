@@ -1,11 +1,12 @@
 import armazenamento as amz
 import email
 
-#base_dir =  r"C:\Users\Henrique\Documents\DESOFT\Projeto-Final---Bachega-Viacava-e-Guazzelli"
+base_dir =  r"C:\Users\Henrique\Documents\DESOFT\Projeto-Final---Bachega-Viacava-e-Guazzelli"
 #base_dir = r"C:\Users\B155 FIRE V3\Documents\Projeto-Final---Bachega-Viacava-e-Guazzelli"
 
 from tkinter import *
 from tkinter import ttk
+from tkinter import messagebox
 
 
 class BBQ(ttk.Frame):
@@ -14,19 +15,6 @@ class BBQ(ttk.Frame):
         self.window = Tk()
         self.window.title("           BBQ")
         self.window.geometry("360x301+100+100")
-#        self.window.rowconfigure(0, minsize=50)
-#        self.window.rowconfigure(1, minsize=50)
-#        self.window.rowconfigure(2, minsize=50)
-#        self.window.rowconfigure(3, minsize=50)
-#        self.window.rowconfigure(4, minsize=50)
-#        self.window.rowconfigure(5, minsize=50)
-#        self.window.rowconfigure(6, minsize=50)
-#        self.window.rowconfigure(7, minsize=50)
-#        self.window.columnconfigure(0, minsize=50)
-#        self.window.columnconfigure(1, minsize=50)
-#        self.window.columnconfigure(2, minsize=50)
-#        self.window.columnconfigure(3, minsize=50)
-#        self.window.columnconfigure(4, minsize=50)
         
         self.mainframe = ttk.Frame(self.window)
         self.mainframe.grid(column=0, row=0, sticky=("nsew"))
@@ -69,15 +57,13 @@ class BBQ(ttk.Frame):
         self.mostrar_frame(PaginaRelatorio)
 
     def botao_novo_churrasco(self, cont):
-        dicionario_convidados, dicionario_comidas, dicionario_bebidas = amz.novo_churrasco(base_dir)
-#        varc1.set(0)
-#        varc2.set(0)
-#        varc3.set(0)
-#        varc4.set(0)
-#        varc5.set(0)
-#        varc6.set(0)
-        self.mostrar_frame(PaginaMyBBQ)
+        pergunta_se_apaga(self)
+        if yesorno == True:    
+            dicionario_convidados, dicionario_comidas, dicionario_bebidas = amz.novo_churrasco(base_dir)
+            self.mostrar_frame(PaginaMyBBQ)
     
+    def pergunta_se_apaga(self):
+        yesorno = messagebox.askyesno("", "Se você continuar, todos os dados serão apagados. \n Tem certeza de que deseja continuar?")
 
 class PaginaInicial(ttk.Frame):
     
@@ -104,25 +90,14 @@ class PaginaInicial(ttk.Frame):
         label = ttk.Label(self, text='')
         label.grid(row=0, column=0, sticky="nsew")
 
-#    def botao_novo_churrasco(self, cont):
-#        dicionario_convidados, dicionario_comidas, dicionario_bebidas = amz.novo_churrasco(base_dir)
-#        PaginaCarnes.varc1.set(0)
-#        PaginaCarnes.varc2.set(0)
-#        PaginaCarnes.varc3.set(0)
-#        PaginaCarnes.varc4.set(0)
-#        PaginaCarnes.varc5.set(0)
-#        PaginaCarnes.varc6.set(0)
-#        self.mostrar_frame(PaginaMyBBQ)
-    
-
         nbbqbutton = ttk.Button(self, text='GERENCIAR CHURRASCO',
                                command=lambda: controller.botao_gerenciar_churrasco(self))
 
-        nbbqbutton.grid(column=2, row=1, sticky=("nsew"))
+        nbbqbutton.grid(column=2, row=2, sticky=("nsew"))
         
         ebbqbutton = ttk.Button(self, text='NOVO CHURRASCO',
-                               command=lambda: controller.botao_novo_churrasco(self))
-        ebbqbutton.grid(column=2, row=2, sticky=("nsew"))
+                               command=lambda: controller.pergunta_se_apaga())
+        ebbqbutton.grid(column=2, row=1, sticky=("nsew"))
         
 class PaginaMyBBQ(ttk.Frame):
     
@@ -245,43 +220,43 @@ class PaginaCarnes(ttk.Frame):
         #listbox.configure(yscrollcommand=s.set)
                 
         preçoc = ttk.Label(self, text = 'Preço')        
-        preçoc.grid(row=0, column=3, sticky = 'nsew')
+        preçoc.grid(row=1, column=3, sticky = 'nsew')
         
         self.varc1 = IntVar()
         carne1 = ttk.Label(self, text="Picanha")
-        carne1.grid(row=2, column=1, sticky="nsew")
+        carne1.grid(row=3, column=1, sticky="nsew")
         checkc1 = ttk.Checkbutton(self, variable=self.varc1)
-        checkc1.grid(row=2, column=2,sticky="nsew")
+        checkc1.grid(row=3, column=2,sticky="nsew")
         
         self.varc2 = IntVar()                
         carne2 = ttk.Label(self, text="Fraldinha")
-        carne2.grid(row=3, column=1, sticky="nsew")
+        carne2.grid(row=4, column=1, sticky="nsew")
         checkc2 = ttk.Checkbutton(self, variable=self.varc2)
-        checkc2.grid(row=3, column=2,sticky="nsew")        
+        checkc2.grid(row=4, column=2,sticky="nsew")        
         
         self.varc3 = IntVar()
         carne3 = ttk.Label(self, text="Maminha")
-        carne3.grid(row=4, column=1, sticky="nsew")
+        carne3.grid(row=5, column=1, sticky="nsew")
         checkc3 = ttk.Checkbutton(self, variable=self.varc3)
-        checkc3.grid(row=4, column=2,sticky="nsew")        
+        checkc3.grid(row=5, column=2,sticky="nsew")        
         
         self.varc4 = IntVar()
         carne4 = ttk.Label(self, text="Contra-filé")
-        carne4.grid(row=5, column=1, sticky="nsew")
+        carne4.grid(row=6, column=1, sticky="nsew")
         checkc4 = ttk.Checkbutton(self,variable=self.varc4)
-        checkc4.grid(row=5, column=2,sticky="nsew")
+        checkc4.grid(row=6, column=2,sticky="nsew")
         
         self.varc5 = IntVar()
         carne5 = ttk.Label(self, text="Linguiça")
-        carne5.grid(row=6, column=1, sticky="nsew")
+        carne5.grid(row=7, column=1, sticky="nsew")
         checkc5 = ttk.Checkbutton(self, variable=self.varc5)
-        checkc5.grid(row=6, column=2,sticky="nsew")
+        checkc5.grid(row=7, column=2,sticky="nsew")
         
         self.varc6 = IntVar()                                
         carne6 = ttk.Label(self, text="Coração de frango")
-        carne6.grid(row=7, column=1, sticky="nsew")
+        carne6.grid(row=8, column=1, sticky="nsew")
         checkc6 = ttk.Checkbutton(self, variable=self.varc6)
-        checkc6.grid(row=7, column=2,sticky="nsew")
+        checkc6.grid(row=8, column=2,sticky="nsew")
         
         VoltarButton = ttk.Button(self, text='VOLTAR',
                                command=lambda: controller.mostrar_frame(PaginaMyBBQ))
