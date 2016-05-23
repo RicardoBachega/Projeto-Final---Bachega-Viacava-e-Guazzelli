@@ -2,7 +2,7 @@ import armazenamento as amz
 import email
 
 #base_dir =  r"C:\Users\Henrique\Documents\DESOFT\Projeto-Final---Bachega-Viacava-e-Guazzelli"
-#base_dir = r"C:\Users\B155 FIRE V3\Documents\Projeto-Final---Bachega-Viacava-e-Guazzelli"
+base_dir = r"C:\Users\B155 FIRE V3\Documents\Projeto-Final---Bachega-Viacava-e-Guazzelli"
 #base_dir =  r"C:\Users\RICARDO\Documents\GitHub\Projeto-Final---Bachega-Viacava-e-Guazzelli"
 
 
@@ -52,44 +52,30 @@ class BBQ(ttk.Frame):
         dicionario_comidas, dicionario_bebidas, lista_comidas, lista_bebidas = amz.leitura(base_dir)
         amz.armazena(dicionario_comidas, dicionario_bebidas, lista_comidas, lista_bebidas, base_dir)
         self.window.destroy()
-        
-    def adiciona_a_lista_comidas(self, variavel, nome, lista_comidas):
-        if nome not in lista_comidas:
-            if variavel == 1:
-                lista_comidas.append(nome)
-        elif nome in lista_comidas:
-            if variavel == 0:
-                lista_comidas.remove(nome)
-        return lista_comidas
-                
-    def adiciona_a_lista_bebidas(self, variavel, nome, lista_bebidas):
-        if nome not in lista_bebidas:
-            if variavel == 1:
-                lista_bebidas.append(nome)
-        elif nome in lista_comidas:
-            if variavel == 0:
-                lista_bebidas.remove(nome)
-        return lista_bebidas
     
     def mostrar_pagina_relatorio(self, cont, adiciona_a_lista_comidas, adiciona_a_lista_bebidas):
         dicionario_comidas, dicionario_bebidas, lista_comidas, lista_bebidas = amz.leitura(base_dir)
-        print(dicionario_comidas)
-        adiciona_a_lista_comidas(self, self.frames[PaginaCarnes].varc1, "Picanha", lista_comidas)
-        adiciona_a_lista_comidas(self, self.frames[PaginaCarnes].varc2, "Maminha", lista_comidas)
-        adiciona_a_lista_comidas(self, self.frames[PaginaCarnes].varc3, "Fraldinha", lista_comidas)
-        adiciona_a_lista_comidas(self, self.frames[PaginaCarnes].varc4, "Contra-filé", lista_comidas)
-        adiciona_a_lista_comidas(self, self.frames[PaginaCarnes].varc5, "Alcatra", lista_comidas)
-        adiciona_a_lista_comidas(self, self.frames[PaginaCarnes].varc6, "Coraçao de frango", lista_comidas)
-        adiciona_a_lista_comidas(self, self.frames[PaginaCarnes].varc7, "Linguiça", lista_comidas)
-        adiciona_a_lista_bebidas(self, self.frames[PaginaBebidas].varb1, "Vodka", lista_bebidas)
-        adiciona_a_lista_bebidas(self, self.frames[PaginaBebidas].varb2, "Whisky", lista_bebidas)
-        adiciona_a_lista_bebidas(self, self.frames[PaginaBebidas].varb3, "Tequila", lista_bebidas)
-        adiciona_a_lista_bebidas(self, self.frames[PaginaBebidas].varb4, "Cerveja", lista_bebidas)
-        adiciona_a_lista_bebidas(self, self.frames[PaginaBebidas].varbn1, "Refrigerante", lista_bebidas)
+        amz.adiciona_a_lista_comidas(self, self.frames[PaginaCarnes].varc1, "Picanha", lista_comidas)
+        amz.adiciona_a_lista_comidas(self, self.frames[PaginaCarnes].varc2, "Maminha", lista_comidas)
+        amz.adiciona_a_lista_comidas(self, self.frames[PaginaCarnes].varc3, "Fraldinha", lista_comidas)
+        amz.adiciona_a_lista_comidas(self, self.frames[PaginaCarnes].varc4, "Contra-filé", lista_comidas)
+        amz.adiciona_a_lista_comidas(self, self.frames[PaginaCarnes].varc5, "Alcatra", lista_comidas)
+        amz.adiciona_a_lista_comidas(self, self.frames[PaginaCarnes].varc6, "Coraçao de frango", lista_comidas)
+        amz.adiciona_a_lista_comidas(self, self.frames[PaginaCarnes].varc7, "Linguiça", lista_comidas)
+        amz.adiciona_a_lista_bebidas(self, self.frames[PaginaBebidas].varb1, "Vodka", lista_bebidas)
+        amz.adiciona_a_lista_bebidas(self, self.frames[PaginaBebidas].varb2, "Whisky", lista_bebidas)
+        amz.adiciona_a_lista_bebidas(self, self.frames[PaginaBebidas].varb3, "Tequila", lista_bebidas)
+        amz.adiciona_a_lista_bebidas(self, self.frames[PaginaBebidas].varb4, "Cerveja", lista_bebidas)
+        amz.adiciona_a_lista_bebidas(self, self.frames[PaginaBebidas].varbn1, "Refrigerante", lista_bebidas)
         homens = self.frames[PaginaParticipantes].var_homens.get()
         mulheres = self.frames[PaginaParticipantes].var_mulheres.get()
         crianças = self.frames[PaginaParticipantes].var_crianças.get()
         dicionario_comidas, dicionario_bebidas = amz.calcula_quantidades(dicionario_comidas, dicionario_bebidas, lista_comidas, lista_bebidas, homens, mulheres, crianças, base_dir)
+        print(dicionario_comidas)
+        print(dicionario_bebidas)
+        print(lista_comidas)
+        print(lista_bebidas)
+        print(self.frames[PaginaCarnes].varc1)
         amz.armazena(dicionario_comidas, dicionario_bebidas, lista_comidas, lista_bebidas, base_dir)
         self.mostrar_frame(PaginaRelatorio)
 
@@ -188,7 +174,7 @@ class PaginaMyBBQ(ttk.Frame):
         bebidasButton.grid(column=2, row=3, sticky=("nsew"))        
 
         relatórioButton = ttk.Button(self, text='LISTA',
-                               command=lambda: controller.mostrar_pagina_relatorio(BBQ, BBQ.adiciona_a_lista_comidas, BBQ.adiciona_a_lista_bebidas))
+                               command=lambda: controller.mostrar_pagina_relatorio(BBQ, amz.adiciona_a_lista_comidas, amz.adiciona_a_lista_bebidas))
         relatórioButton.grid(column=2, row=4, sticky=("nsew"))          
         
         saveexitButton = ttk.Button(self, text='SALVAR E FECHAR',
