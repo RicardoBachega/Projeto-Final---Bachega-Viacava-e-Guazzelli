@@ -1,6 +1,6 @@
 import pickle
 
-base_dir =  r"C:\Users\Henrique\Documents\DESOFT\Projeto-Final---Bachega-Viacava-e-Guazzelli"
+#base_dir =  r"C:\Users\Henrique\Documents\DESOFT\Projeto-Final---Bachega-Viacava-e-Guazzelli"
 #base_dir = r"C:\Users\B155 FIRE V3\Documents\Projeto-Final---Bachega-Viacava-e-Guazzelli"
 
 def armazena(dicionario_comidas, dicionario_bebidas, lista_comidas, lista_bebidas, base_dir):
