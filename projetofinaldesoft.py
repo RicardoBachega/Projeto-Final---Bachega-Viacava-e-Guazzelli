@@ -1,7 +1,7 @@
 import armazenamento as amz
 import email
 
-#base_dir =  r"C:\Users\Henrique\Documents\DESOFT\Projeto-Final---Bachega-Viacava-e-Guazzelli"
+base_dir =  r"C:\Users\Henrique\Documents\DESOFT\Projeto-Final---Bachega-Viacava-e-Guazzelli"
 #base_dir = r"C:\Users\B155 FIRE V3\Documents\Projeto-Final---Bachega-Viacava-e-Guazzelli"
 #base_dir =  r"C:\Users\RICARDO\Documents\GitHub\Projeto-Final---Bachega-Viacava-e-Guazzelli"
 
@@ -206,15 +206,16 @@ class PaginaParticipantes(ttk.Frame):
         VoltarButton.grid(column=9, row=11, sticky=("nsew"))
         
         
-        homens = ttk.Label(self)
-        homens.configure(text='Homens:')
-        homens.grid(row=2, column=5, sticky='nsew')
+        labelhomens = ttk.Label(self)
+        labelhomens.configure(text='Homens:')
+        labelhomens.grid(row=2, column=5, sticky='nsew')
                                
         self.maisverdeimage = tk.PhotoImage(file="maisverde.gif")
         self.menosvermelhoimage = tk.PhotoImage(file="menosvermelho.gif")
         
-        self.imagemale = tk.PhotoImage(file='male.gif')
-        self.imagefemale = tk.PhotoImage(file='female.gif')
+        self.imagemale = tk.PhotoImage(file='male(1).gif')
+        self.imagefemale = tk.PhotoImage(file='female(1).gif')
+        self.imagechild = tk.PhotoImage(file='criancas(1).gif')
         
         self.escolhe_qtde_homens = Spinbox(self, from_=0, to=40.0)
         self.var_homens = IntVar(self.escolhe_qtde_homens)
@@ -233,14 +234,18 @@ class PaginaParticipantes(ttk.Frame):
 #        menosmanButton.configure(image=self.menosvermelhoimage)
 #        menosmanButton.grid(row=3, column=3, sticky='nsew')
              
-        mulheres = ttk.Label(self)
-        mulheres.configure(text='Mulheres:')
-        mulheres.grid(row=5, column=5, sticky='nsew')
+        labelmulheres = ttk.Label(self)
+        labelmulheres.configure(text='Mulheres:')
+        labelmulheres.grid(row=5, column=5, sticky='nsew')
         
         self.escolhe_qtde_mulheres = Spinbox(self, from_=0, to=40.0)
         self.var_mulheres = IntVar(self.escolhe_qtde_mulheres)
         self.escolhe_qtde_mulheres.configure(textvariable=self.var_mulheres)
         self.escolhe_qtde_mulheres.place(y=123, x=161, width=30, height= 25)
+        
+        self.imagemulher = ttk.Label(self)
+        self.imagemulher.configure(image=self.imagefemale)
+        self.imagemulher.place(y=85, x=100)
         
 #        maiswomanButton = ttk.Button(self)
 #        maiswomanButton.configure(image=self.maisverdeimage)
@@ -250,14 +255,18 @@ class PaginaParticipantes(ttk.Frame):
 #        menoswomanButton.configure(image=self.menosvermelhoimage)
 #        menoswomanButton.grid(row=6, column=3, sticky='nsew')
         
-        criancas = ttk.Label(self)
-        criancas.configure(text='Crianças:')
-        criancas.grid(row=8, column=5, sticky='nsew')
+        labelcrianças = ttk.Label(self)
+        labelcrianças.configure(text='Crianças:')
+        labelcrianças.grid(row=8, column=5, sticky='nsew')
         
         self.escolhe_qtde_crianças = Spinbox(self, from_=0, to=40.0)
         self.var_crianças = IntVar(self.escolhe_qtde_crianças)
         self.escolhe_qtde_crianças.configure(textvariable=self.var_crianças)
         self.escolhe_qtde_crianças.place(y=193, x=161, width=30, height= 25)
+        
+        self.imagemulher = ttk.Label(self)
+        self.imagemulher.configure(image=self.imagechild)
+        self.imagemulher.place(y=130, x=100)        
         
 #        maiscriancaButton = ttk.Button(self)
 #        maiscriancaButton.configure(image=self.maisverdeimage)
