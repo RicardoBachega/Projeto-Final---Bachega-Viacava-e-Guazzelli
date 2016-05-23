@@ -52,21 +52,39 @@ class BBQ(ttk.Frame):
         dicionario_comidas, dicionario_bebidas, lista_comidas, lista_bebidas = amz.leitura(base_dir)
         amz.armazena(dicionario_comidas, dicionario_bebidas, lista_comidas, lista_bebidas, base_dir)
         self.window.destroy()
-    
+        
+    def adiciona_a_lista_comidas(self, variavel, nome, lista_comidas):
+        if nome not in lista_comidas:
+            if variavel == 1:
+                lista_comidas.append(nome)
+        elif nome in lista_comidas:
+            if variavel == 0:
+                lista_comidas.remove(nome)
+        return lista_comidas
+                
+    def adiciona_a_lista_bebidas(self, variavel, nome, lista_bebidas):
+        if nome not in lista_bebidas:
+            if variavel == 1:
+                lista_bebidas.append(nome)
+        elif nome in lista_comidas:
+            if variavel == 0:
+                lista_bebidas.remove(nome)
+        return lista_bebidas
+#    
     def mostrar_pagina_relatorio(self, cont, adiciona_a_lista_comidas, adiciona_a_lista_bebidas):
         dicionario_comidas, dicionario_bebidas, lista_comidas, lista_bebidas = amz.leitura(base_dir)
-        amz.adiciona_a_lista_comidas(self, self.frames[PaginaCarnes].varc1, "Picanha", lista_comidas)
-        amz.adiciona_a_lista_comidas(self, self.frames[PaginaCarnes].varc2, "Maminha", lista_comidas)
-        amz.adiciona_a_lista_comidas(self, self.frames[PaginaCarnes].varc3, "Fraldinha", lista_comidas)
-        amz.adiciona_a_lista_comidas(self, self.frames[PaginaCarnes].varc4, "Contra-filé", lista_comidas)
-        amz.adiciona_a_lista_comidas(self, self.frames[PaginaCarnes].varc5, "Alcatra", lista_comidas)
-        amz.adiciona_a_lista_comidas(self, self.frames[PaginaCarnes].varc6, "Coraçao de frango", lista_comidas)
-        amz.adiciona_a_lista_comidas(self, self.frames[PaginaCarnes].varc7, "Linguiça", lista_comidas)
-        amz.adiciona_a_lista_bebidas(self, self.frames[PaginaBebidas].varb1, "Vodka", lista_bebidas)
-        amz.adiciona_a_lista_bebidas(self, self.frames[PaginaBebidas].varb2, "Whisky", lista_bebidas)
-        amz.adiciona_a_lista_bebidas(self, self.frames[PaginaBebidas].varb3, "Tequila", lista_bebidas)
-        amz.adiciona_a_lista_bebidas(self, self.frames[PaginaBebidas].varb4, "Cerveja", lista_bebidas)
-        amz.adiciona_a_lista_bebidas(self, self.frames[PaginaBebidas].varbn1, "Refrigerante", lista_bebidas)
+        adiciona_a_lista_comidas(self, self.frames[PaginaCarnes].varc1.get(), "Picanha", lista_comidas)
+        adiciona_a_lista_comidas(self, self.frames[PaginaCarnes].varc2.get(), "Maminha", lista_comidas)
+        adiciona_a_lista_comidas(self, self.frames[PaginaCarnes].varc3.get(), "Fraldinha", lista_comidas)
+        adiciona_a_lista_comidas(self, self.frames[PaginaCarnes].varc4.get(), "Contra-filé", lista_comidas)
+        adiciona_a_lista_comidas(self, self.frames[PaginaCarnes].varc5.get(), "Alcatra", lista_comidas)
+        adiciona_a_lista_comidas(self, self.frames[PaginaCarnes].varc6.get(), "Coraçao de frango", lista_comidas)
+        adiciona_a_lista_comidas(self, self.frames[PaginaCarnes].varc7.get(), "Linguiça", lista_comidas)
+        adiciona_a_lista_bebidas(self, self.frames[PaginaBebidas].varb1.get(), "Vodka", lista_bebidas)
+        adiciona_a_lista_bebidas(self, self.frames[PaginaBebidas].varb2.get(), "Whisky", lista_bebidas)
+        adiciona_a_lista_bebidas(self, self.frames[PaginaBebidas].varb3.get(), "Tequila", lista_bebidas)
+        adiciona_a_lista_bebidas(self, self.frames[PaginaBebidas].varb4.get(), "Cerveja", lista_bebidas)
+        adiciona_a_lista_bebidas(self, self.frames[PaginaBebidas].varbn1.get(), "Refrigerante", lista_bebidas)
         homens = self.frames[PaginaParticipantes].var_homens.get()
         mulheres = self.frames[PaginaParticipantes].var_mulheres.get()
         crianças = self.frames[PaginaParticipantes].var_crianças.get()
@@ -77,7 +95,26 @@ class BBQ(ttk.Frame):
         print(lista_bebidas)
         print(self.frames[PaginaCarnes].varc1)
         amz.armazena(dicionario_comidas, dicionario_bebidas, lista_comidas, lista_bebidas, base_dir)
+        print(dicionario_comidas)
+        print(lista_comidas)
+        print(self.frames[PaginaCarnes].varc1.get())
         self.mostrar_frame(PaginaRelatorio)
+        
+    def tipos_carne(self):
+        if self.frames[PaginaCarnes].varc1 == 1:
+            lista_comidas.append("Picanha")
+        if self.frames[PaginaCarnes].varc2 == 1:
+            lista_comidas.append("Maminha")
+        if self.frames[PaginaCarnes].varc3 == 1:
+            lista_comidas.append("Fraldinha")
+        if self.frames[PaginaCarnes].varc4 == 1:
+            lista_comidas.append("Contra-filé")
+        if self.frames[PaginaCarnes].varc5 == 1:
+            lista_comidas.append("Alcatra")
+        if self.frames[PaginaCarnes].varc6 == 1:
+            lista_comidas.append("Coração de frango")
+        if self.frames[PaginaCarnes].varc7 == 1:
+            lista_comidas.append("Linguiça")
 
     def botao_novo_churrasco(self, cont):
         self.pergunta_se_apaga()
@@ -174,7 +211,7 @@ class PaginaMyBBQ(ttk.Frame):
         bebidasButton.grid(column=2, row=3, sticky=("nsew"))        
 
         relatórioButton = ttk.Button(self, text='LISTA',
-                               command=lambda: controller.mostrar_pagina_relatorio(BBQ, amz.adiciona_a_lista_comidas, amz.adiciona_a_lista_bebidas))
+                               command=lambda: controller.mostrar_pagina_relatorio(BBQ, BBQ.adiciona_a_lista_comidas, BBQ.adiciona_a_lista_bebidas))
         relatórioButton.grid(column=2, row=4, sticky=("nsew"))          
         
         saveexitButton = ttk.Button(self, text='SALVAR E FECHAR',
@@ -213,7 +250,7 @@ class PaginaParticipantes(ttk.Frame):
         self.columnconfigure(8, minsize=20)
         self.columnconfigure(9, minsize=16)
         
-        label = ttk.Label(self, text="CONVIDADOS")
+        label = ttk.Label(self, text="CONVIDADOS", font=('Helvetica', 10, 'bold'))
         label.grid(row=0, column=2, sticky="nsew")
         
         VoltarButton = ttk.Button(self, text='VOLTAR',
