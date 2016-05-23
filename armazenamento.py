@@ -69,15 +69,15 @@ def calcula_quantidades(dicionario_comidas, dicionario_bebidas, lista_comidas, l
         dicionario_comidas["Picanha"] += (((homens * 450) + (mulheres * 350) + (crianças * 250))/len(lista_comidas))
     if "Maminha" in lista_comidas:
         dicionario_comidas["Maminha"] += (((homens * 450) + (mulheres * 350) + (crianças * 250))/len(lista_comidas))
-    if "Maminha" in lista_comidas:
+    if "Fraldinha" in lista_comidas:
         dicionario_comidas["Fraldinha"] += (((homens * 450) + (mulheres * 350) + (crianças * 250))/len(lista_comidas))
-    if "Maminha" in lista_comidas:
+    if "Contra-filé" in lista_comidas:
         dicionario_comidas["Contra-filé"] += (((homens * 450) + (mulheres * 350) + (crianças * 250))/len(lista_comidas))
-    if "Maminha" in lista_comidas:
+    if "Alcatra" in lista_comidas:
         dicionario_comidas["Alcatra"] += (((homens * 450) + (mulheres * 350) + (crianças * 250))/len(lista_comidas))
-    if "Maminha" in lista_comidas:
+    if "Coração de frango" in lista_comidas:
         dicionario_comidas["Coração de frango"] += (((homens * 450) + (mulheres * 350) + (crianças * 250))/len(lista_comidas))
-    if "Maminha" in lista_comidas:
+    if "Linguiça" in lista_comidas:
         dicionario_comidas["Linguiça"] += (((homens * 450) + (mulheres * 350) + (crianças * 250))/len(lista_comidas))
     if "Vodka" in lista_bebidas:
         dicionario_bebidas["Vodka"] += (((homens * 300) + (mulheres * 150) + (crianças * 0))/len(lista_bebidas))
