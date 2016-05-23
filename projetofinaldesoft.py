@@ -1,8 +1,8 @@
 import armazenamento as amz
 import email
 
-base_dir =  r"C:\Users\Henrique\Documents\DESOFT\Projeto-Final---Bachega-Viacava-e-Guazzelli"
-#base_dir = r"C:\Users\B155 FIRE V3\Documents\Projeto-Final---Bachega-Viacava-e-Guazzelli"
+#base_dir =  r"C:\Users\Henrique\Documents\DESOFT\Projeto-Final---Bachega-Viacava-e-Guazzelli"
+base_dir = r"C:\Users\B155 FIRE V3\Documents\Projeto-Final---Bachega-Viacava-e-Guazzelli"
 #base_dir =  r"C:\Users\RICARDO\Documents\GitHub\Projeto-Final---Bachega-Viacava-e-Guazzelli"
 
 
@@ -333,64 +333,35 @@ class PaginaBebidas(ttk.Frame):
         label = ttk.Label(self, text="Selecione as bebidas que \n você deseja em seu churrasco", font=('Helvetica', 8, 'bold', 'italic'))
         label.grid(row=0, column=2, sticky="nsew")
         
-        bebidas_alcol = ttk.Label(self, text = 'ALCOÓLICAS')        
-        bebidas_alcol.grid(row=1, column=2, sticky = 'nsew')
-        
-        preçob = ttk.Label(self, text = 'Preço')        
-        preçob.grid(row=1, column=4, sticky = 'nsew')
-        
         self.varb1 = IntVar()
-        bebida1 = ttk.Label(self, text="Cerveja")
+        bebida1 = ttk.Label(self, text="Vodka")
         bebida1.grid(row=2, column=2, sticky="nsew")
         checkb1 = ttk.Checkbutton(self, variable=self.varb1)
         checkb1.grid(row=2, column=3,sticky="nsew")
         
         self.varb2 = IntVar()
-        bebida2 = ttk.Label(self, text="Vodka")
+        bebida2 = ttk.Label(self, text="Whisky")
         bebida2.grid(row=3, column=2, sticky="nsew")
         checkb2 = ttk.Checkbutton(self, variable=self.varb2)
         checkb2.grid(row=3, column=3,sticky="nsew")
         
         self.varb3 = IntVar()
-        bebida3 = ttk.Label(self, text="Skol Beats")
+        bebida3 = ttk.Label(self, text="Tequila")
         bebida3.grid(row=4, column=2, sticky="nsew")
         checkb3 = ttk.Checkbutton(self, variable=self.varb3)
         checkb3.grid(row=4, column=3,sticky="nsew")
         
         self.varb4 = IntVar()
-        bebida4 = ttk.Label(self, text="")
+        bebida4 = ttk.Label(self, text="Cerveja")
         bebida4.grid(row=5, column=2, sticky="nsew")
         checkb4 = ttk.Checkbutton(self, variable=self.varb4)
-        checkb4.grid(row=5, column=3,sticky="nsew")   
-        
-        self.varb5 = IntVar()
-        bebida5 = ttk.Label(self, text="Cachaça")
-        bebida5.grid(row=5, column=2, sticky="nsew")
-        checkb5 = ttk.Checkbutton(self, variable=self.varb5)
-        checkb5.grid(row=5, column=3,sticky="nsew") 
-        
-        espaço = ttk.Label(self,text = '')
-        espaço.grid(row=9, column=3, sticky='nsew')
-        bebidas_nalcol = ttk.Label(self, text = 'NÃO ALCOÓLICAS')        
-        bebidas_nalcol.grid(row=10, column=2, sticky = 'nsew')
+        checkb4.grid(row=5, column=3,sticky="nsew")
         
         self.varbn1 = IntVar()
-        bebidab1 = ttk.Label(self, text="Coca-Cola")
+        bebidab1 = ttk.Label(self, text="Refrigerante")
         bebidab1.grid(row=11, column=2, sticky="nsew")
         checkbb1 = ttk.Checkbutton(self, variable=self.varbn1)
         checkbb1.grid(row=11, column=3,sticky="nsew")
-        
-        self.varbn2 = IntVar()
-        bebidab2 = ttk.Label(self, text="Guaraná Antártica")
-        bebidab2.grid(row=12, column=2, sticky="nsew")
-        checkbb2 = ttk.Checkbutton(self, variable=self.varbn2)
-        checkbb2.grid(row=12, column=3,sticky="nsew")
-        
-        self.varbn3 = IntVar()
-        bebidab3 = ttk.Label(self, text="Água")
-        bebidab3.grid(row=13, column=2, sticky="nsew")
-        checkbb3 = ttk.Checkbutton(self, variable=self.varbn3)
-        checkbb3.grid(row=13, column=3,sticky="nsew")
         
         VoltarButton = ttk.Button(self, text='VOLTAR',
                                command=lambda: controller.mostrar_frame(PaginaMyBBQ))

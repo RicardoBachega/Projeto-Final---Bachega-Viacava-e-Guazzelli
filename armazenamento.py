@@ -1,7 +1,7 @@
 import pickle
 
-base_dir =  r"C:\Users\Henrique\Documents\DESOFT\Projeto-Final---Bachega-Viacava-e-Guazzelli"
-#base_dir = r"C:\Users\B155 FIRE V3\Documents\Projeto-Final---Bachega-Viacava-e-Guazzelli"
+#base_dir =  r"C:\Users\Henrique\Documents\DESOFT\Projeto-Final---Bachega-Viacava-e-Guazzelli"
+base_dir = r"C:\Users\B155 FIRE V3\Documents\Projeto-Final---Bachega-Viacava-e-Guazzelli"
 
 def armazena(dicionario_comidas, dicionario_bebidas, lista_comidas, lista_bebidas, base_dir):
     
@@ -55,7 +55,7 @@ def zera_dicionarios(dicionario_comidas, dicionario_bebidas, lista_comidas, list
     armazena(dicionario_comidas, dicionario_bebidas, lista_comidas, lista_bebidas, base_dir)
     
     return dicionario_comidas, dicionario_bebidas, lista_comidas, lista_bebidas
-    
+
 def novo_churrasco(base_dir):
     dicionario_comidas, dicionario_bebidas, lista_comidas, lista_bebidas = leitura(base_dir)
     zera_dicionarios(dicionario_comidas, dicionario_bebidas, lista_comidas, lista_bebidas, base_dir)
@@ -64,7 +64,7 @@ def novo_churrasco(base_dir):
     
 def calcula_quantidades(dicionario_comidas, dicionario_bebidas, lista_comidas, lista_bebidas, homens, mulheres, crianças, base_dir):
     dicionario_comidas = {"Picanha" : 0, "Maminha" : 0, "Fraldinha" : 0, "Contra-filé" : 0, "Alcatra": 0, "Coração de frango": 0, "Linguiça": 0}
-    dicionario_bebidas = {"Vodka" : 0, "Tequila" : 0, "Whisky" : 0, "Cerveja": 0, "Refrigerante": 0, "Água": 0}
+    dicionario_bebidas = {"Vodka" : 0, "Tequila" : 0, "Whisky" : 0, "Cerveja": 0, "Refrigerante": 0}
     if "Picanha" in lista_comidas:
         dicionario_comidas["Picanha"] += (((homens * 450) + (mulheres * 350) + (crianças * 250))/len(lista_comidas))
     if "Maminha" in lista_comidas:
