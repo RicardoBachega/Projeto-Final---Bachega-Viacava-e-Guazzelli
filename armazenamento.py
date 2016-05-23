@@ -39,7 +39,7 @@ def leitura(base_dir):
 def zera_dicionarios(dicionario_comidas, dicionario_bebidas, dicionario_convidados, base_dir):
     
     dicionario_comidas = {"Picanha" : 0, "Maminha" : 0, "Fraldinha" : 0, "Contra-filé" : 0, "Alcatra": 0, "Coração de frango": 0, "Linguiça": 0}
-    dicionario_bebidas = {"Vodka" : 0, "Tequila" : 0, "Whisky" : 0}
+    dicionario_bebidas = {"Vodka" : 0, "Tequila" : 0, "Whisky" : 0, "Cerveja"}
     dicionario_convidados = {}
     
     armazena(dicionario_comidas, dicionario_bebidas, dicionario_convidados, base_dir)
@@ -52,7 +52,7 @@ def novo_churrasco(base_dir):
     
     return dicionario_convidados, dicionario_comidas, dicionario_bebidas
     
-def calcula_quantidades(dicionario_convidados, dicionario_bebidas, dicionario_comidas, base_dir):
+def calcula_quantidades(dicionario_convidados, dicionario_bebidas, dicionario_comidas):
     for key,value in dicionario_convidados:
         if value == 1:            
             dicionario_comidas["Picanha"] += 250/len(dicionario_comidas)

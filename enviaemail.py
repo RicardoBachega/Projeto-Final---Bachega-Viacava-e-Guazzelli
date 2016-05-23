@@ -3,7 +3,7 @@ import smtplib
 #     definir email do usuario como: toaddrs  = "exemplo@exemplo.exemplo"
 
 def envia_email(texto, toaddrs):
-    fromaddr = "felipevf@al.insper.edu.br"
+    fromaddr = "ricardonb@al.insper.edu.br"
     # Add the From: and To: headers at the start!
     msg = (texto.format(fromaddr, toaddrs))
     
@@ -16,6 +16,6 @@ def envia_email(texto, toaddrs):
     
     return aviso
 
-envia_email("Olá, cara!", "fevifrei@hotmail.com")
+envia_email("Olá, cara!", "ricardo.n.b@hotmail.com")
 
-print(envia_email("Olá, cara!", "fevifrei@hotmail.com"))
+print(envia_email("Olá, cara!", "ricardo.n.b@hotmail.com"))
