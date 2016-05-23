@@ -48,7 +48,7 @@ def leitura(base_dir):
 def zera_dicionarios(dicionario_comidas, dicionario_bebidas, lista_comidas, lista_bebidas, base_dir):
     
     dicionario_comidas = {"Picanha" : 0, "Maminha" : 0, "Fraldinha" : 0, "Contra-filé" : 0, "Alcatra": 0, "Coração de frango": 0, "Linguiça": 0}
-    dicionario_bebidas = {"Vodka" : 0, "Tequila" : 0, "Whisky" : 0, "Cerveja": 0, "Refrigerante": 0, "Água": 0}
+    dicionario_bebidas = {"Vodka" : 0, "Tequila" : 0, "Whisky" : 0, "Cerveja": 0, "Refrigerante": 0}
     lista_comidas = []
     lista_bebidas = []
     
@@ -61,3 +61,31 @@ def novo_churrasco(base_dir):
     zera_dicionarios(dicionario_comidas, dicionario_bebidas, base_dir)
     
     return dicionario_comidas, dicionario_bebidas
+    
+def calcula_quantidades(dicionario_comidas, dicionario_bebidas, lista_comidas, lista_bebidas, homens, mulheres, crianças, base_dir):
+    dicionario_comidas = {"Picanha" : 0, "Maminha" : 0, "Fraldinha" : 0, "Contra-filé" : 0, "Alcatra": 0, "Coração de frango": 0, "Linguiça": 0}
+    dicionario_bebidas = {"Vodka" : 0, "Tequila" : 0, "Whisky" : 0, "Cerveja": 0, "Refrigerante": 0, "Água": 0}
+    if "Picanha" in lista_comidas:
+        dicionario_comidas["Picanha"] += (((homens * 450) + (mulheres * 350) + (crianças * 250))/len(lista_comidas))
+    if "Maminha" in lista_comidas:
+        dicionario_comidas["Maminha"] += (((homens * 450) + (mulheres * 350) + (crianças * 250))/len(lista_comidas))
+    if "Maminha" in lista_comidas:
+        dicionario_comidas["Fraldinha"] += (((homens * 450) + (mulheres * 350) + (crianças * 250))/len(lista_comidas))
+    if "Maminha" in lista_comidas:
+        dicionario_comidas["Contra-filé"] += (((homens * 450) + (mulheres * 350) + (crianças * 250))/len(lista_comidas))
+    if "Maminha" in lista_comidas:
+        dicionario_comidas["Alcatra"] += (((homens * 450) + (mulheres * 350) + (crianças * 250))/len(lista_comidas))
+    if "Maminha" in lista_comidas:
+        dicionario_comidas["Coração de frango"] += (((homens * 450) + (mulheres * 350) + (crianças * 250))/len(lista_comidas))
+    if "Maminha" in lista_comidas:
+        dicionario_comidas["Linguiça"] += (((homens * 450) + (mulheres * 350) + (crianças * 250))/len(lista_comidas))
+    if "Vodka" in lista_bebidas:
+        dicionario_bebidas["Vodka"] += (((homens * 300) + (mulheres * 150) + (crianças * 0))/len(lista_bebidas))
+    if "Whisky" in lista_bebidas:
+        dicionario_bebidas["Whisky"] += (((homens * 300) + (mulheres * 150) + (crianças * 0))/len(lista_bebidas))
+    if "Tequila" in lista_bebidas:
+        dicionario_bebidas["Tequila"] += (((homens * 300) + (mulheres * 150) + (crianças * 0))/len(lista_bebidas))
+    if "Cerveja" in lista_bebidas:
+        dicionario_bebidas["Cerveja"] += (((homens * 2000) + (mulheres * 1000) + (crianças * 0))/len(lista_bebidas))
+    if "Refrigerante" in lista_bebidas:
+        dicionario_bebidas["Refrigerante"] += (((homens * 1000) + (mulheres * 500) + (crianças * 500))/len(lista_bebidas))
