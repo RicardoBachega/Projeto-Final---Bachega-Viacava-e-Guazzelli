@@ -46,14 +46,17 @@ class BBQ(ttk.Frame):
     
     def botao_gerenciar_churrasco(self, cont):
         dicionario_comidas, dicionario_bebidas, lista_comidas, lista_bebidas = amz.leitura(base_dir)
+        lista_variaveis = amz.leitura_variaveis(base_dir)
+        self.frames[PaginaCarnes].leitura_checkbuttons_carnes()
         self.mostrar_frame(PaginaMyBBQ)
-
-    def salvar_e_fechar(self, base_dir):
-        dicionario_comidas, dicionario_bebidas, lista_comidas, lista_bebidas = amz.leitura(base_dir)
+        return dicionario_comidas, dicionario_bebidas, lista_comidas, lista_bebidas, lista_variaveis
+#novo
+    def salvar_e_fechar(self, dicionario_comidas, dicionario_bebidas, lista_comidas, lista_bebidas, lista_variaveis, base_dir):
         amz.armazena(dicionario_comidas, dicionario_bebidas, lista_comidas, lista_bebidas, base_dir)
+        amz.armazena_variaveis(lista_variaveis, base_dir) #novo
         self.window.destroy()
         
-    def adiciona_a_lista_comidas(self, variavel, nome, lista_comidas):
+    def adiciona_a_lista_comidas(self, variavel, nome, lista_comidas): #novo
         if nome not in lista_comidas:
             if variavel == 1:
                 lista_comidas.append(nome)
@@ -62,7 +65,7 @@ class BBQ(ttk.Frame):
                 lista_comidas.remove(nome)
         return lista_comidas
                 
-    def adiciona_a_lista_bebidas(self, variavel, nome, lista_bebidas):
+    def adiciona_a_lista_bebidas(self, variavel, nome, lista_bebidas): #novo
         if nome not in lista_bebidas:
             if variavel == 1:
                 lista_bebidas.append(nome)
@@ -215,7 +218,7 @@ class PaginaMyBBQ(ttk.Frame):
         relatórioButton.grid(column=2, row=4, sticky=("nsew"))          
         
         saveexitButton = ttk.Button(self, text='SALVAR E FECHAR',
-                               command=lambda: controller.salvar_e_fechar(base_dir))
+                               command=lambda: controller.salvar_e_fechar(dicionario_comidas, dicionario_bebidas, lista_comidas, lista_bebidas, lista_variaveis, base_dir))
         saveexitButton.grid(column=2, row=5, sticky=("nsew"))
     
         #botao que volta a pagina inicial
@@ -273,6 +276,9 @@ class PaginaParticipantes(ttk.Frame):
         self.var_homens = IntVar(self.escolhe_qtde_homens)
         self.escolhe_qtde_homens.configure(textvariable=self.var_homens)
         self.escolhe_qtde_homens.place(y=61, x=161, width=30, height= 25)
+        lista_variaveis = amz.leitura_variaveis(base_dir)
+        lista_variaveis[0] = self.var_homens.get()
+        amz.armazena_variaveis(lista_variaveis, base_dir)
         
         self.imagehomem = ttk.Label(self)
         self.imagehomem.configure(image=self.imagemale)
@@ -286,6 +292,9 @@ class PaginaParticipantes(ttk.Frame):
         self.var_mulheres = IntVar(self.escolhe_qtde_mulheres)
         self.escolhe_qtde_mulheres.configure(textvariable=self.var_mulheres)
         self.escolhe_qtde_mulheres.place(y=123, x=161, width=30, height= 25)
+        lista_variaveis = amz.leitura_variaveis(base_dir)
+        lista_variaveis[1] = self.var_mulheres.get()
+        amz.armazena_variaveis(lista_variaveis, base_dir)
         
         self.imagemulher = ttk.Label(self)
         self.imagemulher.configure(image=self.imagefemale)
@@ -303,6 +312,9 @@ class PaginaParticipantes(ttk.Frame):
         self.var_crianças = IntVar(self.escolhe_qtde_crianças)
         self.escolhe_qtde_crianças.configure(textvariable=self.var_crianças)
         self.escolhe_qtde_crianças.place(y=193, x=161, width=30, height= 25)
+        lista_variaveis = amz.leitura_variaveis(base_dir)
+        lista_variaveis[2] = self.var_crianças.get()
+        amz.armazena_variaveis(lista_variaveis, base_dir)
         
         self.imagecriança = ttk.Label(self)
         self.imagecriança.configure(image=self.imagechild)
@@ -370,6 +382,16 @@ class PaginaCarnes(ttk.Frame):
         VoltarButton = ttk.Button(self, text='VOLTAR',
                                command=lambda: controller.mostrar_frame(PaginaMyBBQ))
         VoltarButton.grid(column=3, row=100, sticky=("nsew"))
+    
+    def leitura_checkbuttons_carnes(self):
+        lista_variaveis = amz.leitura_variaveis(base_dir)
+        self.varc1.set(lista_variaveis[3])
+        self.varc2.set(lista_variaveis[4])
+        self.varc3.set(lista_variaveis[5])
+        self.varc4.set(lista_variaveis[6])
+        self.varc5.set(lista_variaveis[7])
+        self.varc6.set(lista_variaveis[8])
+        self.varc7.set(lista_variaveis[9])
         
     def zerar_checkbuttons_carnes(self):
         self.varc1.set(0)

@@ -3,6 +3,21 @@ import pickle
 #base_dir =  r"C:\Users\Henrique\Documents\DESOFT\Projeto-Final---Bachega-Viacava-e-Guazzelli"
 base_dir = r"C:\Users\B155 FIRE V3\Documents\Projeto-Final---Bachega-Viacava-e-Guazzelli"
 
+
+#novo
+def armazena_variaveis(lista_variaveis, base_dir):
+    filename = base_dir + r"\arquivo_variaveis.dados"
+    fileobj = open(filename, 'wb')    
+    pickle.dump(lista_variaveis, fileobj)
+    fileobj.close()
+
+#novo    
+def leitura_variaveis(base_dir):
+    filename = base_dir + r"\arquivo_variaveis.dados"
+    fileobj = open(filename, 'rb')
+    variaveis = pickle.load(fileobj)
+    return variaveis
+
 def armazena(dicionario_comidas, dicionario_bebidas, lista_comidas, lista_bebidas, base_dir):
     
     filename = base_dir + r"\arquivo_comidas.dados"
@@ -90,3 +105,6 @@ def calcula_quantidades(dicionario_comidas, dicionario_bebidas, lista_comidas, l
     if "Refrigerante" in lista_bebidas:
         dicionario_bebidas["Refrigerante"] += (((homens * 1000) + (mulheres * 500) + (crianças * 500))/len(lista_bebidas))
     return dicionario_comidas, dicionario_bebidas
+    
+# homens, mulheres, crianças, picanha, maminha, fraldinha, contra-filé, alcatra, coracao, linguica, whisky, vodka, tequila, cerveja, refrigerante
+# lista_variaveis = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
