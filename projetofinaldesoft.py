@@ -1,27 +1,33 @@
 import armazenamento as amz
 import email
 
-base_dir =  r"C:\Users\Henrique\Documents\DESOFT\Projeto-Final---Bachega-Viacava-e-Guazzelli"
+#base_dir =  r"C:\Users\Henrique\Documents\DESOFT\Projeto-Final---Bachega-Viacava-e-Guazzelli"
 #base_dir = r"C:\Users\B155 FIRE V3\Documents\Projeto-Final---Bachega-Viacava-e-Guazzelli"
-base_dir =  r"C:\Users\RICARDO\Documents\GitHub\Projeto-Final---Bachega-Viacava-e-Guazzelli"
+#base_dir =  r"C:\Users\RICARDO\Documents\GitHub\Projeto-Final---Bachega-Viacava-e-Guazzelli"
 
+import tkinter as tk
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
+from tkinter import font
+#from PIL import ImageTk,Image
+
+#fonte1 = font.Font()
 
 
 class BBQ(ttk.Frame):
     def __init__(self):
         #janela inicial
         self.window = Tk()
-        self.window.title("           BBQ")
-        self.window.geometry("360x301+100+100")
+        self.window.title("BBQ")
+        self.window.geometry("360x301+400+200")
+        self.window.resizable(width=False, height=False)
         
         self.mainframe = ttk.Frame(self.window)
         self.mainframe.grid(column=0, row=0, sticky=("nsew"))
-        self.mainframe.columnconfigure(0, weight=1)
-        self.mainframe.rowconfigure(0, weight=1)
-        
+#        self.mainframe.columnconfigure(0, weight=1)
+#        self.mainframe.rowconfigure(0, weight=1)
+#        
         self.window.iconbitmap(self, default='beef2.ico')
        
         self.frames = {}
@@ -61,20 +67,27 @@ class BBQ(ttk.Frame):
         self.pergunta_se_apaga()
         if self.yesorno == True:
             dicionario_convidados, dicionario_comidas, dicionario_bebidas = amz.novo_churrasco(base_dir)
-            self.frames[PaginaCarnes].zerar_checkbuttons()
+            self.frames[PaginaCarnes].zerar_checkbuttons_carnes()
+            self.frames[PaginaBebidas].zerar_checkbuttons_bebidas()
             self.mostrar_frame(PaginaMyBBQ)           
     
     def pergunta_se_apaga(self):
-        self.yesorno = messagebox.askyesno("", "Se você continuar, todos os dados serão apagados. \n Tem certeza de que deseja continuar?")
+        self.yesorno = messagebox.askyesno("Novo Churrasco", "Se você continuar, todos os dados serão apagados. \n Tem certeza de que deseja continuar?")
 
     def enviar_email(self):
         envia_email(dicionario_convidados + dicionario_bebidas + dicionario_comidas, "ricardo.n.b@hotmail.com")
+
+### FAZER COM OPALÃO CALCULO DE CARNE        
+#    def calcula_carne(self):
+#        carnes = []
+#        if self.varc1 == 1:
+#            carnes.append
 
 class PaginaInicial(ttk.Frame):
     
     def __init__(self, parent, controller):
         ttk.Frame.__init__(self, parent)
-        self.rowconfigure(0, minsize=50)
+        self.rowconfigure(0, minsize=0)
         self.rowconfigure(1, minsize=50)
         self.rowconfigure(2, minsize=50)
         self.rowconfigure(3, minsize=50)
@@ -82,12 +95,16 @@ class PaginaInicial(ttk.Frame):
         self.rowconfigure(5, minsize=50)
         self.rowconfigure(6, minsize=50)
         self.rowconfigure(7, minsize=50)
-        self.columnconfigure(0, minsize=50)
+        self.columnconfigure(0, minsize=0)
         self.columnconfigure(1, minsize=50)
         self.columnconfigure(2, minsize=50)
         self.columnconfigure(3, minsize=100)
         self.columnconfigure(4, minsize=50)
         self.columnconfigure(5, minsize=50)
+        
+        self.background_image = tk.PhotoImage(file="bg4.gif")
+        self.background = ttk.Label(self, image=self.background_image)
+        self.background.place(x=0, y=0, relwidth=0.85, relheight=0.85)
         
 #        image = PhotoImage(file='bg1.gif')
 #        image1 = ImageTk.PhotoImage(image)
@@ -98,11 +115,11 @@ class PaginaInicial(ttk.Frame):
         nbbqbutton = ttk.Button(self, text='GERENCIAR CHURRASCO',
                                command=lambda: controller.botao_gerenciar_churrasco(self))
 
-        nbbqbutton.grid(column=2, row=2, sticky=("nsew"))
+        nbbqbutton.grid(column=3, row=4, sticky=("nsew"))
         
         ebbqbutton = ttk.Button(self, text='NOVO CHURRASCO',
                                command=lambda: controller.botao_novo_churrasco(self))
-        ebbqbutton.grid(column=2, row=1, sticky=("nsew"))
+        ebbqbutton.grid(column=3, row=2, sticky=("nsew"))
         
 class PaginaMyBBQ(ttk.Frame):
     
@@ -160,34 +177,106 @@ class PaginaParticipantes(ttk.Frame):
     
     def __init__(self, parent, controller):
         ttk.Frame.__init__(self, parent)
-        self.rowconfigure(2, minsize = 50)
+        self.rowconfigure(1, minsize = 20)
+        self.rowconfigure(2, minsize = 20)
+        self.rowconfigure(3, minsize = 20)
+        self.rowconfigure(4, minsize = 20)
+        self.rowconfigure(5, minsize = 20)
+        self.rowconfigure(6, minsize = 20)
+        self.rowconfigure(7, minsize = 20)
+        self.rowconfigure(8, minsize = 20)
+        self.rowconfigure(9, minsize = 20)
+        self.rowconfigure(10, minsize = 20)
+        self.columnconfigure(1, minsize=20)
+        self.columnconfigure(2, minsize=20)
+        self.columnconfigure(3, minsize=20)
+        self.columnconfigure(4, minsize=20)
+        self.columnconfigure(5, minsize=20)
+        self.columnconfigure(6, minsize=20)
+        self.columnconfigure(7, minsize=20)
+        self.columnconfigure(8, minsize=20)
+        self.columnconfigure(9, minsize=16)
+        
         label = ttk.Label(self, text="CONVIDADOS")
-        label.grid(row=0, column=1, sticky="nsew")
+        label.grid(row=0, column=2, sticky="nsew")
         
         VoltarButton = ttk.Button(self, text='VOLTAR',
                                command=lambda: controller.mostrar_frame(PaginaMyBBQ))
-        VoltarButton.grid(column=2, row=100, sticky=("nsew"))
+        VoltarButton.grid(column=9, row=11, sticky=("nsew"))
+        
+        
+        homens = ttk.Label(self)
+        homens.configure(text='Homens:')
+        homens.grid(row=2, column=5, sticky='nsew')
+                               
+        self.maisverdeimage = tk.PhotoImage(file="maisverde.gif")
+        self.menosvermelhoimage = tk.PhotoImage(file="menosvermelho.gif")
+        
+        self.escolhe_qtde_homens = Spinbox(self, from_=1.0, to=40.0)
+        self.var_homens = IntVar(self.escolhe_qtde_homens)
+        self.escolhe_qtde_homens.configure(textvariable=self.var_homens)
+        self.escolhe_qtde_homens.place(y=61, x=161, width=30, height= 25)
+
+#        maismanButton = ttk.Button(self)
+#        maismanButton.configure(image=self.maisverdeimage)
+#        maismanButton.grid(row=3, column=7, sticky='nsew')
+#        
+#        menosmanButton = ttk.Button(self)
+#        menosmanButton.configure(image=self.menosvermelhoimage)
+#        menosmanButton.grid(row=3, column=3, sticky='nsew')
+             
+        mulheres = ttk.Label(self)
+        mulheres.configure(text='Mulheres:')
+        mulheres.grid(row=5, column=5, sticky='nsew')
+        
+        self.escolhe_qtde_mulheres = ttk.Entry(self)
+        self.escolhe_qtde_mulheres.configure(state='disabled')
+        self.escolhe_qtde_mulheres.place(y=133, x=161, width=30, height= 25)
+        self.var_mulheres = IntVar(self.escolhe_qtde_mulheres)
+        
+        maiswomanButton = ttk.Button(self)
+        maiswomanButton.configure(image=self.maisverdeimage)
+        maiswomanButton.grid(row=6, column=7, sticky='nsew')
+        
+        menoswomanButton = ttk.Button(self)
+        menoswomanButton.configure(image=self.menosvermelhoimage)
+        menoswomanButton.grid(row=6, column=3, sticky='nsew')
+        
+        criancas = ttk.Label(self)
+        criancas.configure(text='Crianças:')
+        criancas.grid(row=8, column=5, sticky='nsew')
+        
+        self.escolhe_qtde_crianças = ttk.Entry(self)
+        self.escolhe_qtde_crianças.configure(state='disabled')
+        self.escolhe_qtde_crianças.place(y=203, x=161, width=30, height= 25)
+        self.var_crianças = IntVar(self.escolhe_qtde_crianças)
+        
+        maiscriancaButton = ttk.Button(self)
+        maiscriancaButton.configure(image=self.maisverdeimage)
+        maiscriancaButton.grid(row=9, column=7, sticky='nsew')
+        
+        menoscriancaButton = ttk.Button(self)
+        menoscriancaButton.configure(image=self.menosvermelhoimage)
+        menoscriancaButton.grid(row=9, column=3, sticky='nsew')
         
         #self.greenplus = PhotoImage(file='+verde.jpg')
-        self.AddMButton = ttk.Button(self, text='Adicionar Homem', command=self.add_button_homem)
-        self.AddMButton.grid(column=2, row=1, sticky=("nsew"))
-        self.AddWButton = ttk.Button(self, text='Adicionar Mulher', command=self.add_button_mulher)
-        self.AddWButton.grid(column=3, row=1, sticky="nsew")
+        #self.AddMButton = ttk.Button(self, text='Adicionar Homem', command=self.add_button_homem)
+        #self.AddMButton.grid(column=2, row=1, sticky=("nsew"))
+        #self.AddWButton = ttk.Button(self, text='Adicionar Mulher', command=self.add_button_mulher)
+        #self.AddWButton.grid(column=3, row=1, sticky="nsew")
         
         #redX = PhotoImage(file='redX(1).jpg')
-        removeButton = ttk.Button(self, text="Remover Convidado", command = self.remover_button)
-        removeButton.grid(column=2, row=2, sticky=("new"))
+        #removeButton = ttk.Button(self, text="Remover Convidado", command = self.remover_button)
+        #removeButton.grid(column=2, row=2, sticky=("new"))
         
-        self.namevar = StringVar()
-        self.name_entry = ttk.Entry(self, textvariable=self.namevar)
-        self.name_entry.focus_set()     
-        self.name_entry.grid(column=1, row=1, sticky=("nsew"))
+        #self.namevar = StringVar()
+        #self.name_entry = ttk.Entry(self, textvariable=self.namevar)
+        #self.name_entry.focus_set()     
+        #self.name_entry.grid(column=1, row=1, sticky=("nsew"))
         
-        self.listbox_convidados = Listbox(self)
-        self.listbox_convidados.grid(row=2, column=1, sticky=('nsew'))
+        #self.listbox_convidados = Listbox(self)
+        #self.listbox_convidados.grid(row=2, column=1, sticky=('nsew'))
                 
-        #s = ttk.Scrollbar(listbox_convidados, orient=VERTICAL, command=listbox_convidados.yview)
-        #listbox_convidados.configure(yscrollcommand=s.set)
 
     def add_button_homem(self):
         dicionario_convidados, dicionario_comidas, dicionario_bebidas = amz.leitura(base_dir)
@@ -217,7 +306,7 @@ class PaginaCarnes(ttk.Frame):
         self.columnconfigure(3, minsize = 50)
         self.columnconfigure(4, minsize = 50)
         self.columnconfigure(5, minsize = 50)
-        label = ttk.Label(self, text="Selecione as carnes que \n você deseja em seu churrasco")
+        label = ttk.Label(self, text="Selecione as carnes que \n você deseja em seu churrasco", font=('Helvetica', 8, 'bold', 'italic'))
         label.grid(row=0, column=1, sticky="nsew")
                 
         preçoc = ttk.Label(self, text = 'Preço')        
@@ -230,13 +319,13 @@ class PaginaCarnes(ttk.Frame):
         checkc1.grid(row=3, column=2,sticky="nsew")
         
         self.varc2 = IntVar()                
-        carne2 = ttk.Label(self, text="Fraldinha")
+        carne2 = ttk.Label(self, text="Maminha")
         carne2.grid(row=4, column=1, sticky="nsew")
         checkc2 = ttk.Checkbutton(self, variable=self.varc2)
         checkc2.grid(row=4, column=2,sticky="nsew")        
         
         self.varc3 = IntVar()
-        carne3 = ttk.Label(self, text="Maminha")
+        carne3 = ttk.Label(self, text="Fraldinha")
         carne3.grid(row=5, column=1, sticky="nsew")
         checkc3 = ttk.Checkbutton(self, variable=self.varc3)
         checkc3.grid(row=5, column=2,sticky="nsew")        
@@ -248,7 +337,7 @@ class PaginaCarnes(ttk.Frame):
         checkc4.grid(row=6, column=2,sticky="nsew")
         
         self.varc5 = IntVar()
-        carne5 = ttk.Label(self, text="Linguiça")
+        carne5 = ttk.Label(self, text="Alcatra")
         carne5.grid(row=7, column=1, sticky="nsew")
         checkc5 = ttk.Checkbutton(self, variable=self.varc5)
         checkc5.grid(row=7, column=2,sticky="nsew")
@@ -259,24 +348,31 @@ class PaginaCarnes(ttk.Frame):
         checkc6 = ttk.Checkbutton(self, variable=self.varc6)
         checkc6.grid(row=8, column=2,sticky="nsew")
         
+        self.varc7 = IntVar()                                
+        carne7 = ttk.Label(self, text="Linguiça")
+        carne7.grid(row=9, column=1, sticky="nsew")
+        checkc7 = ttk.Checkbutton(self, variable=self.varc7)
+        checkc7.grid(row=9, column=2,sticky="nsew")
+        
+        
         VoltarButton = ttk.Button(self, text='VOLTAR',
                                command=lambda: controller.mostrar_frame(PaginaMyBBQ))
         VoltarButton.grid(column=3, row=100, sticky=("nsew"))
         
-    def zerar_checkbuttons(self):
+    def zerar_checkbuttons_carnes(self):
         self.varc1.set(0)
         self.varc2.set(0)
         self.varc3.set(0)
         self.varc4.set(0)
         self.varc5.set(0)
         self.varc6.set(0)
-        
+        self.varc7.set(0)
         
 class PaginaBebidas(ttk.Frame):
     
     def __init__(self, parent, controller):
         ttk.Frame.__init__(self, parent)
-        label = ttk.Label(self, text="Selecione as bebidas que \n você deseja em seu churrasco")
+        label = ttk.Label(self, text="Selecione as bebidas que \n você deseja em seu churrasco", font=('Helvetica', 8, 'bold', 'italic'))
         label.grid(row=0, column=2, sticky="nsew")
         
         bebidas_alcol = ttk.Label(self, text = 'ALCOÓLICAS')        
@@ -342,6 +438,16 @@ class PaginaBebidas(ttk.Frame):
                                command=lambda: controller.mostrar_frame(PaginaMyBBQ))
         VoltarButton.grid(column=3, row=100, sticky=("nsew"))
         
+    def zerar_checkbuttons_bebidas(self):
+        self.varb1.set(0)
+        self.varb2.set(0)
+        self.varb3.set(0)
+        self.varb4.set(0)
+        self.varb5.set(0)
+        self.varbn1.set(0)
+        self.varbn2.set(0)
+        self.varbn3.set(0)        
+        
 class PaginaRelatorio(ttk.Frame):
     
     def __init__(self, parent, controller):
@@ -358,7 +464,8 @@ class PaginaRelatorio(ttk.Frame):
     
         VoltarButton = ttk.Button(self, text='VOLTAR',
                                command=lambda: controller.mostrar_frame(PaginaMyBBQ))
-        VoltarButton.grid(column=3, row=100, sticky=("nsew"))
+        VoltarButton.grid(column=1, row=5, sticky=("nsew"))
+        
         
 app = BBQ()
 app.iniciar()
