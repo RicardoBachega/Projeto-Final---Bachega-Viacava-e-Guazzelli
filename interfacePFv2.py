@@ -43,7 +43,7 @@ class BBQ:
         self.background.place(x=0, y=0, relwidth=6, relheight=0.85)
         
         self.ebbqbutton = ttk.Button(self.PaginaInicial)
-        self.ebbqbutton.configure(text='GERENCIAR CHURRASCO2', command=self.mostrar_PaginaParticipantes)
+        self.ebbqbutton.configure(text='GERENCIAR CHURRASCO', command=self.mostrar_PaginaMyBBQ)
         self.ebbqbutton.grid(column=3, row=4, sticky=("nsew"))
         
         self.nbbqbutton = ttk.Button(self.PaginaInicial)
@@ -113,44 +113,52 @@ class BBQ:
         self.VoltarButton.configure(text='VOLTAR', command=self.mostrar_PaginaMyBBQ)
         self.VoltarButton.grid(column=9, row=11, sticky=("nsew"))
 
-        self.homens = ttk.Label(self.PaginaParticipantes)
-        self.homens.configure(text='Homens:')
-        self.homens.grid(row=2, column=5, sticky='nsew')
+        self.labelhomens = ttk.Label(self.PaginaParticipantes)
+        self.labelhomens.configure(text='Homens:')
+        self.labelhomens.grid(row=2, column=5, sticky='nsew')
         
-        self.maisverdeimage = tk.PhotoImage(file="maisverde.gif")
-        self.menosvermelhoimage = tk.PhotoImage(file="menosvermelho.gif")
+        self.imagemale = tk.PhotoImage(file='male(1).gif')
+        self.imagefemale = tk.PhotoImage(file='female(1).gif')
+        self.imagechild = tk.PhotoImage(file='criancas(1).gif')
         
-        self.maismanButton = ttk.Button(self.PaginaParticipantes)
-        self.maismanButton.configure(image=self.maisverdeimage)
-        self.maismanButton.grid(row=3, column=7, sticky='nsew')
+        self.escolhe_qtde_homens = tk.Spinbox(self.PaginaParticipantes, from_=0, to=40.0)
+        self.var_homens = tk.IntVar(self.escolhe_qtde_homens)
+        self.escolhe_qtde_homens.configure(textvariable=self.var_homens)
+        self.escolhe_qtde_homens.place(y=61, x=161, width=30, height= 25)
         
-        self.menosmanButton = ttk.Button(self.PaginaParticipantes)
-        self.menosmanButton.configure(image=self.menosvermelhoimage)
-        self.menosmanButton.grid(row=3, column=3, sticky='nsew')
+        self.imagehomem = ttk.Label(self.PaginaParticipantes)
+        self.imagehomem.configure(image=self.imagemale)
+        self.imagehomem.place(y=55, x=100)
              
-        self.mulheres = ttk.Label(self.PaginaParticipantes)
-        self.mulheres.configure(text='Mulheres:')
-        self.mulheres.grid(row=5, column=5, sticky='nsew')
+        self.labelmulheres = ttk.Label(self.PaginaParticipantes)
+        self.labelmulheres.configure(text='Mulheres:')
+        self.labelmulheres.grid(row=5, column=5, sticky='nsew')
         
-        self.maiswomanButton = ttk.Button(self.PaginaParticipantes)
-        self.maiswomanButton.configure(image=self.maisverdeimage)
-        self.maiswomanButton.grid(row=6, column=7, sticky='nsew')
+        self.escolhe_qtde_mulheres = tk.Spinbox(self.PaginaParticipantes, from_=0, to=40.0)
+        self.var_mulheres = tk.IntVar(self.escolhe_qtde_mulheres)
+        self.escolhe_qtde_mulheres.configure(textvariable=self.var_mulheres)
+        self.escolhe_qtde_mulheres.place(y=123, x=161, width=30, height= 25)
         
-        self.menoswomanButton = ttk.Button(self.PaginaParticipantes)
-        self.menoswomanButton.configure(image=self.menosvermelhoimage)
-        self.menoswomanButton.grid(row=6, column=3, sticky='nsew')
+        self.imagemulher = ttk.Label(self.PaginaParticipantes)
+        self.imagemulher.configure(image=self.imagefemale)
+        self.imagemulher.place(y=120, x=100)
+                
+        self.labelcrianças = ttk.Label(self.PaginaParticipantes)
+        self.labelcrianças.configure(text='Crianças:')
+        self.labelcrianças.grid(row=8, column=5, sticky='nsew')
         
         self.criancas = ttk.Label(self.PaginaParticipantes)
         self.criancas.configure(text='Crianças:')
         self.criancas.grid(row=8, column=5, sticky='nsew')
         
-        self.maiscriancaButton = ttk.Button(self.PaginaParticipantes)
-        self.maiscriancaButton.configure(image=self.maisverdeimage)
-        self.maiscriancaButton.grid(row=9, column=7, sticky='nsew')
+        self.escolhe_qtde_crianças = tk.Spinbox(self.PaginaParticipantes, from_=0, to=40.0)
+        self.var_crianças = tk.IntVar(self.escolhe_qtde_crianças)
+        self.escolhe_qtde_crianças.configure(textvariable=self.var_crianças)
+        self.escolhe_qtde_crianças.place(y=193, x=161, width=30, height= 25)
         
-        self.menoscriancaButton = ttk.Button(self.PaginaParticipantes)
-        self.menoscriancaButton.configure(image=self.menosvermelhoimage)
-        self.menoscriancaButton.grid(row=9, column=3, sticky='nsew')
+        self.imagecriança = ttk.Label(self.PaginaParticipantes)
+        self.imagecriança.configure(image=self.imagechild)
+        self.imagecriança.place(y=190, x=100)
         
         
         
@@ -302,13 +310,10 @@ class BBQ:
         self.VoltarButton.grid(column=3, row=100, sticky=("nsew"))
         
         
+    
         
         
-        
-        
-        
-        
-
+################################################################################
 
     def mostrar_PaginaInicial(self):
         self.PaginaInicial.tkraise()         
@@ -342,7 +347,17 @@ class BBQ:
         self.varc4.set(0)
         self.varc5.set(0)
         self.varc6.set(0)
-        self.varc7.set(0)    
+        self.varc7.set(0)
+        
+    def zerar_checkbuttons_bebidas(self):
+        self.varb1.set(0)
+        self.varb2.set(0)
+        self.varb3.set(0)
+        self.varb4.set(0)
+        self.varb5.set(0)
+        self.varbn1.set(0)
+        self.varbn2.set(0)
+        self.varbn3.set(0) 
     
     def botao_novo_churrasco(self):
         self.pergunta_se_apaga()
@@ -355,25 +370,6 @@ class BBQ:
        # dicionario_convidados, dicionario_comidas, dicionario_bebidas = amz.leitura(base_dir)
         #amz.armazena(dicionario_comidas, dicionario_bebidas, dicionario_convidados, base_dir)
         self.window.destroy()
-        
-    def add_button_homem(self):
-        #dicionario_convidados, dicionario_comidas, dicionario_bebidas = amz.leitura(base_dir)
-        self.listbox_convidados.insert(END, self.namevar.get())
-        #dicionario_convidados[self.namevar.get()] = 2
-        #amz.armazena(dicionario_comidas, dicionario_bebidas, dicionario_convidados, base_dir)
-        self.name_entry.delete(0, 'end')
-        
-    def add_button_mulher(self):
-        #dicionario_convidados, dicionario_comidas, dicionario_bebidas = amz.leitura(base_dir)
-        #self.listbox_convidados.insert(END, self.namevar.get())
-        #dicionario_convidados[self.namevar.get()] = 1
-        #amz.armazena(dicionario_comidas, dicionario_bebidas, dicionario_convidados, base_dir)
-        self.name_entry.delete(0, 'end')
-        
-    def remover_button(self):
-        #dicionario_convidados, dicionario_comidas, dicionario_bebidas = amz.leitura(base_dir)
-        #del dicionario_convidados[self.listbox_convidados.delete(ANCHOR)]
-        self.listbox_convidados.delete(self.ANCHOR)
     
     def pergunta_se_apaga(self):
         self.yesorno = messagebox.askyesno("Novo Churrasco", "Se você continuar, todos os dados serão apagados. \n Tem certeza de que deseja continuar?")
