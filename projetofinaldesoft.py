@@ -1,7 +1,7 @@
 import armazenamento as amz
 import email
 
-#base_dir =  r"C:\Users\Henrique\Documents\DESOFT\Projeto-Final---Bachega-Viacava-e-Guazzelli"
+base_dir =  r"C:\Users\Henrique\Documents\DESOFT\Projeto-Final---Bachega-Viacava-e-Guazzelli"
 #base_dir = r"C:\Users\B155 FIRE V3\Documents\Projeto-Final---Bachega-Viacava-e-Guazzelli"
 #base_dir =  r"C:\Users\RICARDO\Documents\GitHub\Projeto-Final---Bachega-Viacava-e-Guazzelli"
 
@@ -13,9 +13,6 @@ from tkinter import messagebox
 from tkinter import font
 #from PIL import ImageTk,Image
 
-#fonte1 = font.Font()
-
-
 class BBQ(ttk.Frame):
     def __init__(self):
         #janela inicial
@@ -26,8 +23,6 @@ class BBQ(ttk.Frame):
         
         self.mainframe = ttk.Frame(self.window)
         self.mainframe.grid(column=0, row=0, sticky=("nsew"))
-#        self.mainframe.columnconfigure(0, weight=1)
-#        self.mainframe.rowconfigure(0, weight=1)
 #        
         self.window.iconbitmap(self, default='beef2.ico')
        
@@ -161,7 +156,7 @@ class PaginaMyBBQ(ttk.Frame):
                                command=lambda: controller.mostrar_frame(PaginaBebidas))
         bebidasButton.grid(column=2, row=3, sticky=("nsew"))        
 
-        relatórioButton = ttk.Button(self, text='RELATÓRIO',
+        relatórioButton = ttk.Button(self, text='LISTA',
                                command=lambda: controller.mostrar_pagina_relatorio(PaginaRelatorio))
         relatórioButton.grid(column=2, row=4, sticky=("nsew"))          
         
@@ -416,16 +411,22 @@ class PaginaRelatorio(ttk.Frame):
     def __init__(self, parent, controller):
         dicionario_comidas, dicionario_bebidas, lista_comidas, lista_bebidas = amz.leitura(base_dir)
         ttk.Frame.__init__(self, parent)
-        label = ttk.Label(self, text="Relatório")
-        label.grid(row=0, column=2, sticky="nsew")
-        label3 = ttk.Label(self, text=dicionario_comidas)
-        label3.grid(row=2, column = 2, sticky="nsew")
-        label4 = ttk.Label(self, text=dicionario_bebidas)
-        label4.grid(row=3, column=2, sticky="nsew")
+        
+        self.itens = ttk.Label(self, text='Nome', font=('Helvetica', 8, 'bold', 'italic'))
+        self.itens.place(x=5, y=20)
+        
+        self.itens = ttk.Label(self, text='Lista', font=('Helvetica', 10, 'bold'))
+        self.itens.place(x=0, y=0)
+        
+        self.itens = ttk.Label(self, text='Quantidade', font=('Helvetica', 8, 'bold', 'italic'))
+        self.itens.place(x=130, y=20)
+        
+        self.itens = ttk.Label(self, text='Preço', font=('Helvetica', 8, 'bold', 'italic'))
+        self.itens.place(x=275, y=20)
     
         VoltarButton = ttk.Button(self, text='VOLTAR',
                                command=lambda: controller.mostrar_frame(PaginaMyBBQ))
-        VoltarButton.grid(column=1, row=5, sticky=("nsew"))
+        VoltarButton.place(x=0, y=270)
         
         
 app = BBQ()
