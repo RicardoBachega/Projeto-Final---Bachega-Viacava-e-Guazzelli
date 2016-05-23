@@ -39,7 +39,7 @@ def leitura(base_dir):
 def zera_dicionarios(dicionario_comidas, dicionario_bebidas, dicionario_convidados, base_dir):
     
     dicionario_comidas = {"Picanha" : 0, "Maminha" : 0, "Fraldinha" : 0, "Contra-filé" : 0, "Alcatra": 0, "Coração de frango": 0, "Linguiça": 0}
-    dicionario_bebidas = {"Vodka" : 0, "Tequila" : 0, "Whisky" : 0, "Cerveja"}
+    dicionario_bebidas = {"Vodka" : 0, "Tequila" : 0, "Whisky" : 0, "Cerveja": 0, "Refrigerante": 0, "Água": 0}
     dicionario_convidados = {}
     
     armazena(dicionario_comidas, dicionario_bebidas, dicionario_convidados, base_dir)
