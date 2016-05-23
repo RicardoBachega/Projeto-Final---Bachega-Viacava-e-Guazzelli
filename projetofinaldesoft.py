@@ -2,7 +2,7 @@ import armazenamento as amz
 import email
 
 #base_dir =  r"C:\Users\Henrique\Documents\DESOFT\Projeto-Final---Bachega-Viacava-e-Guazzelli"
-base_dir = r"C:\Users\B155 FIRE V3\Documents\Projeto-Final---Bachega-Viacava-e-Guazzelli"
+#base_dir = r"C:\Users\B155 FIRE V3\Documents\Projeto-Final---Bachega-Viacava-e-Guazzelli"
 #base_dir =  r"C:\Users\RICARDO\Documents\GitHub\Projeto-Final---Bachega-Viacava-e-Guazzelli"
 
 
@@ -50,18 +50,21 @@ class BBQ(ttk.Frame):
         self.window.mainloop()   
     
     def botao_gerenciar_churrasco(self, cont):
-        dicionario_convidados, dicionario_comidas, dicionario_bebidas = amz.leitura(base_dir)
+        dicionario_comidas, dicionario_bebidas, lista_comidas, lista_bebidas = amz.leitura(base_dir)
         self.mostrar_frame(PaginaMyBBQ)
 
     def salvar_e_fechar(self, base_dir):
-        dicionario_convidados, dicionario_comidas, dicionario_bebidas = amz.leitura(base_dir)
-        amz.armazena(dicionario_comidas, dicionario_bebidas, dicionario_convidados, base_dir)
+        dicionario_comidas, dicionario_bebidas, lista_comidas, lista_bebidas = amz.leitura(base_dir)
+        amz.armazena(dicionario_comidas, dicionario_bebidas, lista_comidas, lista_bebidas, base_dir)
         self.window.destroy()
         
     def mostrar_pagina_relatorio(self, cont):
-        dicionario_convidados, dicionario_comidas, dicionario_bebidas = amz.leitura(base_dir)
-        dicionario_convidados, dicionario_comidas, dicionario_bebidas = amz.calcula_quantidades(dicionario_convidados, dicionario_bebidas, dicionario_comidas)
-        amz.armazena(dicionario_comidas, dicionario_bebidas, dicionario_convidados, base_dir)
+        homens = self.frames[PaginaParticipantes].var_homens.get()
+        mulheres = self.frames[PaginaParticipantes].var_mulheres.get()
+        crianças = self.frames[PaginaParticipantes].var_crianças.get()
+        dicionario_comidas, dicionario_bebidas, lista_comidas, lista_bebidas = amz.leitura(base_dir)
+        dicionario_comidas, dicionario_bebidas, lista_comidas, lista_bebidas = amz.calcula_quantidades(dicionario_comidas, dicionario_bebidas, lista_comidas, lista_bebidas, homens, mulheres, crianças, base_dir)
+        amz.armazena(dicionario_comidas, dicionario_bebidas, lista_comidas, lista_bebidas, base_dir)
         self.mostrar_frame(PaginaRelatorio)
 
     def botao_novo_churrasco(self, cont):
@@ -76,7 +79,8 @@ class BBQ(ttk.Frame):
         self.yesorno = messagebox.askyesno("Novo Churrasco", "Se você continuar, todos os dados serão apagados. \n Tem certeza de que deseja continuar?")
 
     def enviar_email(self):
-        envia_email(dicionario_convidados + dicionario_bebidas + dicionario_comidas, "ricardo.n.b@hotmail.com")
+        dicionario_comidas, dicionario_bebidas, lista_comidas, lista_bebidas = amz.leitura(base_dir)
+        envia_email(dicionario_bebidas + dicionario_comidas, "ricardo.n.b@hotmail.com")
 
 ### FAZER COM OPALÃO CALCULO DE CARNE        
 #    def calcula_carne(self):
@@ -171,7 +175,6 @@ class PaginaMyBBQ(ttk.Frame):
         PIbutton.grid(column=2, row=6, sticky=("nsew"))     
     
     def mostrar_pagina_participantes(self, cont):
-        dicionario_convidados, dicionario_comidas, dicionario_bebidas = amz.leitura(base_dir)
         self.mostrar_frame(PaginaParticipantes)
 
 class PaginaParticipantes(ttk.Frame):
@@ -224,14 +227,6 @@ class PaginaParticipantes(ttk.Frame):
         self.imagehomem = ttk.Label(self)
         self.imagehomem.configure(image=self.imagemale)
         self.imagehomem.place(y=55, x=100)
-
-#        maismanButton = ttk.Button(self)
-#        maismanButton.configure(image=self.maisverdeimage)
-#        maismanButton.grid(row=3, column=7, sticky='nsew')
-#        
-#        menosmanButton = ttk.Button(self)
-#        menosmanButton.configure(image=self.menosvermelhoimage)
-#        menosmanButton.grid(row=3, column=3, sticky='nsew')
              
         mulheres = ttk.Label(self)
         mulheres.configure(text='Mulheres:')
@@ -242,14 +237,6 @@ class PaginaParticipantes(ttk.Frame):
         self.escolhe_qtde_mulheres.configure(textvariable=self.var_mulheres)
         self.escolhe_qtde_mulheres.place(y=123, x=161, width=30, height= 25)
         
-#        maiswomanButton = ttk.Button(self)
-#        maiswomanButton.configure(image=self.maisverdeimage)
-#        maiswomanButton.grid(row=6, column=7, sticky='nsew')
-#        
-#        menoswomanButton = ttk.Button(self)
-#        menoswomanButton.configure(image=self.menosvermelhoimage)
-#        menoswomanButton.grid(row=6, column=3, sticky='nsew')
-        
         criancas = ttk.Label(self)
         criancas.configure(text='Crianças:')
         criancas.grid(row=8, column=5, sticky='nsew')
@@ -258,52 +245,6 @@ class PaginaParticipantes(ttk.Frame):
         self.var_crianças = IntVar(self.escolhe_qtde_crianças)
         self.escolhe_qtde_crianças.configure(textvariable=self.var_crianças)
         self.escolhe_qtde_crianças.place(y=193, x=161, width=30, height= 25)
-        
-#        maiscriancaButton = ttk.Button(self)
-#        maiscriancaButton.configure(image=self.maisverdeimage)
-#        maiscriancaButton.grid(row=9, column=7, sticky='nsew')
-#        
-#        menoscriancaButton = ttk.Button(self)
-#        menoscriancaButton.configure(image=self.menosvermelhoimage)
-#        menoscriancaButton.grid(row=9, column=3, sticky='nsew')
-        
-        #self.greenplus = PhotoImage(file='+verde.jpg')
-        #self.AddMButton = ttk.Button(self, text='Adicionar Homem', command=self.add_button_homem)
-        #self.AddMButton.grid(column=2, row=1, sticky=("nsew"))
-        #self.AddWButton = ttk.Button(self, text='Adicionar Mulher', command=self.add_button_mulher)
-        #self.AddWButton.grid(column=3, row=1, sticky="nsew")
-        
-        #redX = PhotoImage(file='redX(1).jpg')
-        #removeButton = ttk.Button(self, text="Remover Convidado", command = self.remover_button)
-        #removeButton.grid(column=2, row=2, sticky=("new"))
-        
-        #self.namevar = StringVar()
-        #self.name_entry = ttk.Entry(self, textvariable=self.namevar)
-        #self.name_entry.focus_set()     
-        #self.name_entry.grid(column=1, row=1, sticky=("nsew"))
-        
-        #self.listbox_convidados = Listbox(self)
-        #self.listbox_convidados.grid(row=2, column=1, sticky=('nsew'))
-                
-
-    def add_button_homem(self):
-        dicionario_convidados, dicionario_comidas, dicionario_bebidas = amz.leitura(base_dir)
-        self.listbox_convidados.insert(END, self.namevar.get())
-        dicionario_convidados[self.namevar.get()] = 2
-        amz.armazena(dicionario_comidas, dicionario_bebidas, dicionario_convidados, base_dir)
-        self.name_entry.delete(0, 'end')
-        
-    def add_button_mulher(self):
-        dicionario_convidados, dicionario_comidas, dicionario_bebidas = amz.leitura(base_dir)
-        self.listbox_convidados.insert(END, self.namevar.get())
-        dicionario_convidados[self.namevar.get()] = 1
-        amz.armazena(dicionario_comidas, dicionario_bebidas, dicionario_convidados, base_dir)
-        self.name_entry.delete(0, 'end')
-        
-    def remover_button(self):
-        dicionario_convidados, dicionario_comidas, dicionario_bebidas = amz.leitura(base_dir)
-        del dicionario_convidados[self.listbox_convidados.delete(ANCHOR)]
-        self.listbox_convidados.delete(ANCHOR)
 
 class PaginaCarnes(ttk.Frame):
     
