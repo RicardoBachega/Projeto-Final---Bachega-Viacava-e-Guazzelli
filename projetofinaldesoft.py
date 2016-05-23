@@ -53,13 +53,44 @@ class BBQ(ttk.Frame):
         amz.armazena(dicionario_comidas, dicionario_bebidas, lista_comidas, lista_bebidas, base_dir)
         self.window.destroy()
         
-    def mostrar_pagina_relatorio(self, cont):
+    def adiciona_a_lista_comidas(self, variavel, nome, lista_comidas):
+        if nome not in lista_comidas:
+            if variavel == 1:
+                lista_comidas.append(nome)
+        elif nome in lista_comidas:
+            if variavel == 2:
+                lista_comidas.remove(nome)
+        return lista_comidas
+                
+    def adiciona_a_lista_bebidas(self, variavel, nome, lista_bebidas):
+        if nome not in lista_bebidas:
+            if variavel == 1:
+                lista_bebidas.append(nome)
+        elif nome in lista_comidas:
+            if variavel == 2:
+                lista_bebidas.remove(nome)
+        return lista_bebidas
+    
+    def mostrar_pagina_relatorio(self, cont, adiciona_a_lista_comidas):
+        dicionario_comidas, dicionario_bebidas, lista_comidas, lista_bebidas = amz.leitura(base_dir)
+        adiciona_a_lista_comidas(self, self.frames[PaginaCarnes].varc1, "Picanha", lista_comidas)
+        adiciona_a_lista_comidas(self, self.frames[PaginaCarnes].varc2, "Maminha", lista_comidas)
+        adiciona_a_lista_comidas(self, self.frames[PaginaCarnes].varc3, "Fraldinha", lista_comidas)
+        adiciona_a_lista_comidas(self, self.frames[PaginaCarnes].varc4, "Contra-filé", lista_comidas)
+        adiciona_a_lista_comidas(self, self.frames[PaginaCarnes].varc5, "Alcatra", lista_comidas)
+        adiciona_a_lista_comidas(self, self.frames[PaginaCarnes].varc6, "Coraçao de frango", lista_comidas)
+        adiciona_a_lista_comidas(self, self.frames[PaginaCarnes].varc7, "Linguiça", lista_comidas)
+        adiciona_a_lista_bebidas(self, self.frames[PaginaBebidas].varb1, "Vodka", lista_bebidas)
+        adiciona_a_lista_bebidas(self, self.frames[PaginaBebidas].varb2, "Whisky", lista_bebidas)
+        adiciona_a_lista_bebidas(self, self.frames[PaginaBebidas].varb3, "Tequila", lista_bebidas)
+        adiciona_a_lista_bebidas(self, self.frames[PaginaBebidas].varb4, "Cerveja", lista_bebidas)
+        adiciona_a_lista_bebidas(self, self.frames[PaginaBebidas].varbn1, "Refrigerante", lista_bebidas)
         homens = self.frames[PaginaParticipantes].var_homens.get()
         mulheres = self.frames[PaginaParticipantes].var_mulheres.get()
         crianças = self.frames[PaginaParticipantes].var_crianças.get()
-        dicionario_comidas, dicionario_bebidas, lista_comidas, lista_bebidas = amz.leitura(base_dir)
         dicionario_comidas, dicionario_bebidas = amz.calcula_quantidades(dicionario_comidas, dicionario_bebidas, lista_comidas, lista_bebidas, homens, mulheres, crianças, base_dir)
         amz.armazena(dicionario_comidas, dicionario_bebidas, lista_comidas, lista_bebidas, base_dir)
+        print(lista_comidas)
         self.mostrar_frame(PaginaRelatorio)
 
     def botao_novo_churrasco(self, cont):
@@ -157,7 +188,7 @@ class PaginaMyBBQ(ttk.Frame):
         bebidasButton.grid(column=2, row=3, sticky=("nsew"))        
 
         relatórioButton = ttk.Button(self, text='LISTA',
-                               command=lambda: controller.mostrar_pagina_relatorio(PaginaRelatorio))
+                               command=lambda: controller.mostrar_frame(PaginaRelatorio))
         relatórioButton.grid(column=2, row=4, sticky=("nsew"))          
         
         saveexitButton = ttk.Button(self, text='SALVAR E FECHAR',
@@ -372,10 +403,7 @@ class PaginaBebidas(ttk.Frame):
         self.varb2.set(0)
         self.varb3.set(0)
         self.varb4.set(0)
-        self.varb5.set(0)
-        self.varbn1.set(0)
-        self.varbn2.set(0)
-        self.varbn3.set(0)        
+        self.varbn1.set(0)      
         
 class PaginaRelatorio(ttk.Frame):
     
