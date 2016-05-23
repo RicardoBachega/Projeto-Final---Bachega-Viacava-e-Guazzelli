@@ -58,7 +58,7 @@ class BBQ(ttk.Frame):
             if variavel == 1:
                 lista_comidas.append(nome)
         elif nome in lista_comidas:
-            if variavel == 2:
+            if variavel == 0:
                 lista_comidas.remove(nome)
         return lista_comidas
                 
@@ -67,12 +67,13 @@ class BBQ(ttk.Frame):
             if variavel == 1:
                 lista_bebidas.append(nome)
         elif nome in lista_comidas:
-            if variavel == 2:
+            if variavel == 0:
                 lista_bebidas.remove(nome)
         return lista_bebidas
     
-    def mostrar_pagina_relatorio(self, cont, adiciona_a_lista_comidas):
+    def mostrar_pagina_relatorio(self, cont, adiciona_a_lista_comidas, adiciona_a_lista_bebidas):
         dicionario_comidas, dicionario_bebidas, lista_comidas, lista_bebidas = amz.leitura(base_dir)
+        print(dicionario_comidas)
         adiciona_a_lista_comidas(self, self.frames[PaginaCarnes].varc1, "Picanha", lista_comidas)
         adiciona_a_lista_comidas(self, self.frames[PaginaCarnes].varc2, "Maminha", lista_comidas)
         adiciona_a_lista_comidas(self, self.frames[PaginaCarnes].varc3, "Fraldinha", lista_comidas)
@@ -90,7 +91,6 @@ class BBQ(ttk.Frame):
         crianças = self.frames[PaginaParticipantes].var_crianças.get()
         dicionario_comidas, dicionario_bebidas = amz.calcula_quantidades(dicionario_comidas, dicionario_bebidas, lista_comidas, lista_bebidas, homens, mulheres, crianças, base_dir)
         amz.armazena(dicionario_comidas, dicionario_bebidas, lista_comidas, lista_bebidas, base_dir)
-        print(lista_comidas)
         self.mostrar_frame(PaginaRelatorio)
 
     def botao_novo_churrasco(self, cont):
@@ -188,7 +188,7 @@ class PaginaMyBBQ(ttk.Frame):
         bebidasButton.grid(column=2, row=3, sticky=("nsew"))        
 
         relatórioButton = ttk.Button(self, text='LISTA',
-                               command=lambda: controller.mostrar_frame(PaginaRelatorio))
+                               command=lambda: controller.mostrar_pagina_relatorio(BBQ, BBQ.adiciona_a_lista_comidas, BBQ.adiciona_a_lista_bebidas))
         relatórioButton.grid(column=2, row=4, sticky=("nsew"))          
         
         saveexitButton = ttk.Button(self, text='SALVAR E FECHAR',
