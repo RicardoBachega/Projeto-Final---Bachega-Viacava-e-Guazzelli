@@ -2,7 +2,7 @@ import armazenamento as amz
 import email
 
 #base_dir =  r"C:\Users\Henrique\Documents\DESOFT\Projeto-Final---Bachega-Viacava-e-Guazzelli"
-#base_dir = r"C:\Users\B155 FIRE V3\Documents\Projeto-Final---Bachega-Viacava-e-Guazzelli"
+base_dir = r"C:\Users\B155 FIRE V3\Documents\Projeto-Final---Bachega-Viacava-e-Guazzelli"
 #base_dir =  r"C:\Users\RICARDO\Documents\GitHub\Projeto-Final---Bachega-Viacava-e-Guazzelli"
 
 
@@ -67,7 +67,7 @@ class BBQ(ttk.Frame):
     def botao_novo_churrasco(self, cont):
         self.pergunta_se_apaga()
         if self.yesorno == True:
-            dicionario_convidados, dicionario_comidas, dicionario_bebidas = amz.novo_churrasco(base_dir)
+            dicionario_comidas, dicionario_bebidas, lista_comidas, lista_bebidas = amz.novo_churrasco(base_dir)
             self.frames[PaginaCarnes].zerar_checkbuttons_carnes()
             self.frames[PaginaBebidas].zerar_checkbuttons_bebidas()
             self.mostrar_frame(PaginaMyBBQ)           
@@ -459,12 +459,10 @@ class PaginaBebidas(ttk.Frame):
 class PaginaRelatorio(ttk.Frame):
     
     def __init__(self, parent, controller):
-        dicionario_convidados, dicionario_comidas, dicionario_bebidas = amz.leitura(base_dir)
+        dicionario_comidas, dicionario_bebidas, lista_comidas, lista_bebidas = amz.leitura(base_dir)
         ttk.Frame.__init__(self, parent)
         label = ttk.Label(self, text="Relatório")
         label.grid(row=0, column=2, sticky="nsew")
-        label2 = ttk.Label(self, text=dicionario_convidados)
-        label2.grid(row=1, column = 2, sticky="nsew")
         label3 = ttk.Label(self, text=dicionario_comidas)
         label3.grid(row=2, column = 2, sticky="nsew")
         label4 = ttk.Label(self, text=dicionario_bebidas)
