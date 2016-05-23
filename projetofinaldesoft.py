@@ -60,7 +60,7 @@ class BBQ(ttk.Frame):
         
     def mostrar_pagina_relatorio(self, cont):
         dicionario_convidados, dicionario_comidas, dicionario_bebidas = amz.leitura(base_dir)
-        dicionario_convidados, dicionario_comidas, dicionario_bebidas = amz.calcula_quantidades(dicionario_convidados, dicionario_bebidas, dicionario_comidas, base_dir)
+        dicionario_convidados, dicionario_comidas, dicionario_bebidas = amz.calcula_quantidades(dicionario_convidados, dicionario_bebidas, dicionario_comidas)
         amz.armazena(dicionario_comidas, dicionario_bebidas, dicionario_convidados, base_dir)
         self.mostrar_frame(PaginaRelatorio)
 
@@ -213,10 +213,17 @@ class PaginaParticipantes(ttk.Frame):
         self.maisverdeimage = tk.PhotoImage(file="maisverde.gif")
         self.menosvermelhoimage = tk.PhotoImage(file="menosvermelho.gif")
         
-        self.escolhe_qtde_homens = Spinbox(self, from_=1.0, to=40.0)
+        self.imagemale = tk.PhotoImage(file='male.gif')
+        self.imagefemale = tk.PhotoImage(file='female.gif')
+        
+        self.escolhe_qtde_homens = Spinbox(self, from_=0, to=40.0)
         self.var_homens = IntVar(self.escolhe_qtde_homens)
         self.escolhe_qtde_homens.configure(textvariable=self.var_homens)
         self.escolhe_qtde_homens.place(y=61, x=161, width=30, height= 25)
+        
+        self.imagehomem = ttk.Label(self)
+        self.imagehomem.configure(image=self.imagemale)
+        self.imagehomem.place(y=55, x=100)
 
 #        maismanButton = ttk.Button(self)
 #        maismanButton.configure(image=self.maisverdeimage)
@@ -230,35 +237,35 @@ class PaginaParticipantes(ttk.Frame):
         mulheres.configure(text='Mulheres:')
         mulheres.grid(row=5, column=5, sticky='nsew')
         
-        self.escolhe_qtde_mulheres = ttk.Entry(self)
-        self.escolhe_qtde_mulheres.configure(state='disabled')
-        self.escolhe_qtde_mulheres.place(y=133, x=161, width=30, height= 25)
+        self.escolhe_qtde_mulheres = Spinbox(self, from_=0, to=40.0)
         self.var_mulheres = IntVar(self.escolhe_qtde_mulheres)
+        self.escolhe_qtde_mulheres.configure(textvariable=self.var_mulheres)
+        self.escolhe_qtde_mulheres.place(y=123, x=161, width=30, height= 25)
         
-        maiswomanButton = ttk.Button(self)
-        maiswomanButton.configure(image=self.maisverdeimage)
-        maiswomanButton.grid(row=6, column=7, sticky='nsew')
-        
-        menoswomanButton = ttk.Button(self)
-        menoswomanButton.configure(image=self.menosvermelhoimage)
-        menoswomanButton.grid(row=6, column=3, sticky='nsew')
+#        maiswomanButton = ttk.Button(self)
+#        maiswomanButton.configure(image=self.maisverdeimage)
+#        maiswomanButton.grid(row=6, column=7, sticky='nsew')
+#        
+#        menoswomanButton = ttk.Button(self)
+#        menoswomanButton.configure(image=self.menosvermelhoimage)
+#        menoswomanButton.grid(row=6, column=3, sticky='nsew')
         
         criancas = ttk.Label(self)
         criancas.configure(text='Crianças:')
         criancas.grid(row=8, column=5, sticky='nsew')
         
-        self.escolhe_qtde_crianças = ttk.Entry(self)
-        self.escolhe_qtde_crianças.configure(state='disabled')
-        self.escolhe_qtde_crianças.place(y=203, x=161, width=30, height= 25)
+        self.escolhe_qtde_crianças = Spinbox(self, from_=0, to=40.0)
         self.var_crianças = IntVar(self.escolhe_qtde_crianças)
+        self.escolhe_qtde_crianças.configure(textvariable=self.var_crianças)
+        self.escolhe_qtde_crianças.place(y=193, x=161, width=30, height= 25)
         
-        maiscriancaButton = ttk.Button(self)
-        maiscriancaButton.configure(image=self.maisverdeimage)
-        maiscriancaButton.grid(row=9, column=7, sticky='nsew')
-        
-        menoscriancaButton = ttk.Button(self)
-        menoscriancaButton.configure(image=self.menosvermelhoimage)
-        menoscriancaButton.grid(row=9, column=3, sticky='nsew')
+#        maiscriancaButton = ttk.Button(self)
+#        maiscriancaButton.configure(image=self.maisverdeimage)
+#        maiscriancaButton.grid(row=9, column=7, sticky='nsew')
+#        
+#        menoscriancaButton = ttk.Button(self)
+#        menoscriancaButton.configure(image=self.menosvermelhoimage)
+#        menoscriancaButton.grid(row=9, column=3, sticky='nsew')
         
         #self.greenplus = PhotoImage(file='+verde.jpg')
         #self.AddMButton = ttk.Button(self, text='Adicionar Homem', command=self.add_button_homem)

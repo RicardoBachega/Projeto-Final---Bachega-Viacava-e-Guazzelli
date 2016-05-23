@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-base_dir =  r"C:\Users\Henrique\Documents\DESOFT\Projeto-Final---Bachega-Viacava-e-Guazzelli"
+#base_dir =  r"C:\Users\Henrique\Documents\DESOFT\Projeto-Final---Bachega-Viacava-e-Guazzelli"
 #base_dir = r"C:\Users\B155 FIRE V3\Documents\Projeto-Final---Bachega-Viacava-e-Guazzelli"
 #base_dir =  r"C:\Users\RICARDO\Documents\GitHub\Projeto-Final---Bachega-Viacava-e-Guazzelli"
 
@@ -43,8 +43,7 @@ class BBQ:
         self.background.place(x=0, y=0, relwidth=6, relheight=0.85)
         
         self.ebbqbutton = ttk.Button(self.PaginaInicial)
-        self.ebbqbutton.configure(text='GERENCIAR CHURRASCO')
-        self.ebbqbutton.configure(command=self.mostrar_PaginaMyBBQ)
+        self.ebbqbutton.configure(text='GERENCIAR CHURRASCO2', command=self.mostrar_PaginaParticipantes)
         self.ebbqbutton.grid(column=3, row=4, sticky=("nsew"))
         
         self.nbbqbutton = ttk.Button(self.PaginaInicial)
