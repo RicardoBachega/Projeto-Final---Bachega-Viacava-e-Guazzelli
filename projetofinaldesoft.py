@@ -63,7 +63,7 @@ class BBQ(ttk.Frame):
         mulheres = self.frames[PaginaParticipantes].var_mulheres.get()
         crianças = self.frames[PaginaParticipantes].var_crianças.get()
         dicionario_comidas, dicionario_bebidas, lista_comidas, lista_bebidas = amz.leitura(base_dir)
-        dicionario_comidas, dicionario_bebidas, lista_comidas, lista_bebidas = amz.calcula_quantidades(dicionario_comidas, dicionario_bebidas, lista_comidas, lista_bebidas, homens, mulheres, crianças, base_dir)
+        dicionario_comidas, dicionario_bebidas = amz.calcula_quantidades(dicionario_comidas, dicionario_bebidas, lista_comidas, lista_bebidas, homens, mulheres, crianças, base_dir)
         amz.armazena(dicionario_comidas, dicionario_bebidas, lista_comidas, lista_bebidas, base_dir)
         self.mostrar_frame(PaginaRelatorio)
 
