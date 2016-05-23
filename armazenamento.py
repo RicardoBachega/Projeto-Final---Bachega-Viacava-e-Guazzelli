@@ -57,10 +57,10 @@ def zera_dicionarios(dicionario_comidas, dicionario_bebidas, lista_comidas, list
     return dicionario_comidas, dicionario_bebidas, lista_comidas, lista_bebidas
     
 def novo_churrasco(base_dir):
-    dicionario_comidas, dicionario_bebidas = leitura(base_dir)
-    zera_dicionarios(dicionario_comidas, dicionario_bebidas, base_dir)
+    dicionario_comidas, dicionario_bebidas, lista_comidas, lista_bebidas = leitura(base_dir)
+    zera_dicionarios(dicionario_comidas, dicionario_bebidas, lista_comidas, lista_bebidas, base_dir)
     
-    return dicionario_comidas, dicionario_bebidas
+    return dicionario_comidas, dicionario_bebidas, lista_comidas, lista_bebidas
     
 def calcula_quantidades(dicionario_comidas, dicionario_bebidas, lista_comidas, lista_bebidas, homens, mulheres, crianças, base_dir):
     dicionario_comidas = {"Picanha" : 0, "Maminha" : 0, "Fraldinha" : 0, "Contra-filé" : 0, "Alcatra": 0, "Coração de frango": 0, "Linguiça": 0}
