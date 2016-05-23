@@ -240,7 +240,7 @@ class PaginaParticipantes(ttk.Frame):
         
         self.imagemulher = ttk.Label(self)
         self.imagemulher.configure(image=self.imagefemale)
-        self.imagemulher.place(y=85, x=100)
+        self.imagemulher.place(y=120, x=100)
                 
         labelcrianças = ttk.Label(self)
         labelcrianças.configure(text='Crianças:')
@@ -255,9 +255,9 @@ class PaginaParticipantes(ttk.Frame):
         self.escolhe_qtde_crianças.configure(textvariable=self.var_crianças)
         self.escolhe_qtde_crianças.place(y=193, x=161, width=30, height= 25)
         
-        self.imagemulher = ttk.Label(self)
-        self.imagemulher.configure(image=self.imagechild)
-        self.imagemulher.place(y=130, x=100)        
+        self.imagecriança = ttk.Label(self)
+        self.imagecriança.configure(image=self.imagechild)
+        self.imagecriança.place(y=190, x=100)        
 
 
 class PaginaCarnes(ttk.Frame):
