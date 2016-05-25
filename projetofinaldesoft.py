@@ -1,7 +1,7 @@
 import armazenamento as amz
 import email
 
-#base_dir =  r"C:\Users\Henrique\Documents\DESOFT\Projeto-Final---Bachega-Viacava-e-Guazzelli"
+base_dir =  r"C:\Users\Henrique\Documents\DESOFT\Projeto-Final---Bachega-Viacava-e-Guazzelli"
 #base_dir = r"C:\Users\B155 FIRE V3\Documents\Projeto-Final---Bachega-Viacava-e-Guazzelli"
 #base_dir =  r"C:\Users\RICARDO\Documents\GitHub\Projeto-Final---Bachega-Viacava-e-Guazzelli"
 
@@ -42,20 +42,36 @@ class BBQ(ttk.Frame):
         frame.tkraise()    
     
     def iniciar(self):
-        self.window.mainloop()   
-    
-    def botao_gerenciar_churrasco(self, cont):
-        dicionario_comidas, dicionario_bebidas, lista_comidas, lista_bebidas = amz.leitura(base_dir)
-        lista_variaveis = amz.leitura_variaveis(base_dir)
-        self.frames[PaginaCarnes].leitura_checkbuttons_carnes()
-        self.mostrar_frame(PaginaMyBBQ)
-        return dicionario_comidas, dicionario_bebidas, lista_comidas, lista_bebidas, lista_variaveis
-#novo
+        self.window.mainloop()  
+
     def salvar_e_fechar(self, dicionario_comidas, dicionario_bebidas, lista_comidas, lista_bebidas, lista_variaveis, base_dir):
         amz.armazena(dicionario_comidas, dicionario_bebidas, lista_comidas, lista_bebidas, base_dir)
         amz.armazena_variaveis(lista_variaveis, base_dir) #novo
         self.window.destroy()
-        
+
+
+    
+    def adiciona_a_lista_variaveis(self, variavel, lista_variaveis):
+        lista_variaveis = amz.leitura_variaveis(base_dir)
+        lista_variaveis[0] = homens
+        lista_variaveis[1] = mulheres
+        lista_variaveis[2] = crianças
+        lista_variaveis[3] = self.frames[PaginaCarnes].varc1.get()
+        lista_variaveis[4] = self.frames[PaginaCarnes].varc2.get()
+        lista_variaveis[5] = self.frames[PaginaCarnes].varc3.get()
+        lista_variaveis[6] = self.frames[PaginaCarnes].varc4.get()
+        lista_variaveis[7] = self.frames[PaginaCarnes].varc5.get()
+        lista_variaveis[8] = self.frames[PaginaCarnes].varc6.get()
+        lista_variaveis[9] = self.frames[PaginaCarnes].varc7.get()
+        lista_variaveis[10] = self.frames[PaginaCarnes].varb1.get()
+        lista_variaveis[11] = self.frames[PaginaCarnes].varb2.get()
+        lista_variaveis[12] = self.frames[PaginaCarnes].varb3.get()
+        lista_variaveis[13] = self.frames[PaginaCarnes].varb4.get()
+        lista_variaveis[14] = self.frames[PaginaCarnes].varbn1.get()
+        amz.armazena_variaveis(lista_variaveis, base_dir)
+            
+        return lista_variaveis
+            
     def adiciona_a_lista_comidas(self, variavel, nome, lista_comidas): #novo
         if nome not in lista_comidas:
             if variavel == 1:
@@ -69,13 +85,16 @@ class BBQ(ttk.Frame):
         if nome not in lista_bebidas:
             if variavel == 1:
                 lista_bebidas.append(nome)
-        elif nome in lista_comidas:
+        elif nome in lista_bebidas:
             if variavel == 0:
                 lista_bebidas.remove(nome)
         return lista_bebidas
 #    
     def mostrar_pagina_relatorio(self, cont, adiciona_a_lista_comidas, adiciona_a_lista_bebidas):
         dicionario_comidas, dicionario_bebidas, lista_comidas, lista_bebidas = amz.leitura(base_dir)
+        print("Inicio de mostrar_pagina_relatorio")
+        print(dicionario_comidas, dicionario_bebidas, lista_comidas, lista_bebidas)
+        print("done")
         adiciona_a_lista_comidas(self, self.frames[PaginaCarnes].varc1.get(), "Picanha", lista_comidas)
         adiciona_a_lista_comidas(self, self.frames[PaginaCarnes].varc2.get(), "Maminha", lista_comidas)
         adiciona_a_lista_comidas(self, self.frames[PaginaCarnes].varc3.get(), "Fraldinha", lista_comidas)
@@ -88,36 +107,29 @@ class BBQ(ttk.Frame):
         adiciona_a_lista_bebidas(self, self.frames[PaginaBebidas].varb3.get(), "Tequila", lista_bebidas)
         adiciona_a_lista_bebidas(self, self.frames[PaginaBebidas].varb4.get(), "Cerveja", lista_bebidas)
         adiciona_a_lista_bebidas(self, self.frames[PaginaBebidas].varbn1.get(), "Refrigerante", lista_bebidas)
+        
         homens = self.frames[PaginaParticipantes].var_homens.get()
         mulheres = self.frames[PaginaParticipantes].var_mulheres.get()
         crianças = self.frames[PaginaParticipantes].var_crianças.get()
+        
         dicionario_comidas, dicionario_bebidas = amz.calcula_quantidades(dicionario_comidas, dicionario_bebidas, lista_comidas, lista_bebidas, homens, mulheres, crianças, base_dir)
+        amz.armazena(dicionario_comidas, dicionario_bebidas, lista_comidas, lista_bebidas, base_dir)
+        print("Final de mostrar_pagina_relatorio")
         print(dicionario_comidas)
         print(dicionario_bebidas)
         print(lista_comidas)
         print(lista_bebidas)
-        print(self.frames[PaginaCarnes].varc1)
-        amz.armazena(dicionario_comidas, dicionario_bebidas, lista_comidas, lista_bebidas, base_dir)
-        print(dicionario_comidas)
-        print(lista_comidas)
-        print(self.frames[PaginaCarnes].varc1.get())
+        print("done")
         self.mostrar_frame(PaginaRelatorio)
-        
-    def tipos_carne(self):
-        if self.frames[PaginaCarnes].varc1 == 1:
-            lista_comidas.append("Picanha")
-        if self.frames[PaginaCarnes].varc2 == 1:
-            lista_comidas.append("Maminha")
-        if self.frames[PaginaCarnes].varc3 == 1:
-            lista_comidas.append("Fraldinha")
-        if self.frames[PaginaCarnes].varc4 == 1:
-            lista_comidas.append("Contra-filé")
-        if self.frames[PaginaCarnes].varc5 == 1:
-            lista_comidas.append("Alcatra")
-        if self.frames[PaginaCarnes].varc6 == 1:
-            lista_comidas.append("Coração de frango")
-        if self.frames[PaginaCarnes].varc7 == 1:
-            lista_comidas.append("Linguiça")
+
+    
+    def botao_gerenciar_churrasco(self, base_dir):
+        dicionario_comidas, dicionario_bebidas, lista_comidas, lista_bebidas = amz.leitura(base_dir)
+        lista_variaveis = amz.leitura_variaveis(base_dir)        
+        print(lista_variaveis)
+        self.frames[PaginaCarnes].leitura_checkbuttons_carnes()
+        self.frames[PaginaBebidas].leitura_checkbuttons_bebidas()
+        self.mostrar_frame(PaginaMyBBQ)
 
     def botao_novo_churrasco(self, cont):
         self.pergunta_se_apaga()
@@ -133,12 +145,6 @@ class BBQ(ttk.Frame):
     def enviar_email(self):
         dicionario_comidas, dicionario_bebidas, lista_comidas, lista_bebidas = amz.leitura(base_dir)
         envia_email(dicionario_bebidas + dicionario_comidas, "ricardo.n.b@hotmail.com")
-
-### FAZER COM OPALÃO CALCULO DE CARNE        
-#    def calcula_carne(self):
-#        carnes = []
-#        if self.varc1 == 1:
-#            carnes.append
 
 class PaginaInicial(ttk.Frame):
     
@@ -170,7 +176,7 @@ class PaginaInicial(ttk.Frame):
         label.grid(row=0, column=0, sticky="nsew")
 
         nbbqbutton = ttk.Button(self, text='GERENCIAR CHURRASCO',
-                               command=lambda: controller.botao_gerenciar_churrasco(self))
+                               command=lambda: controller.botao_gerenciar_churrasco(base_dir))
 
         nbbqbutton.grid(column=3, row=4, sticky=("nsew"))
         
@@ -218,7 +224,7 @@ class PaginaMyBBQ(ttk.Frame):
         relatórioButton.grid(column=2, row=4, sticky=("nsew"))          
         
         saveexitButton = ttk.Button(self, text='SALVAR E FECHAR',
-                               command=lambda: controller.salvar_e_fechar(dicionario_comidas, dicionario_bebidas, lista_comidas, lista_bebidas, lista_variaveis, base_dir))
+                               command=lambda: controller.salvar_e_fechar(base_dir))
         saveexitButton.grid(column=2, row=5, sticky=("nsew"))
     
         #botao que volta a pagina inicial
@@ -276,9 +282,9 @@ class PaginaParticipantes(ttk.Frame):
         self.var_homens = IntVar(self.escolhe_qtde_homens)
         self.escolhe_qtde_homens.configure(textvariable=self.var_homens)
         self.escolhe_qtde_homens.place(y=61, x=161, width=30, height= 25)
-        lista_variaveis = amz.leitura_variaveis(base_dir)
-        lista_variaveis[0] = self.var_homens.get()
-        amz.armazena_variaveis(lista_variaveis, base_dir)
+#        lista_variaveis = amz.leitura_variaveis(base_dir)
+#        lista_variaveis[0] = self.var_homens.get()
+#        amz.armazena_variaveis(lista_variaveis, base_dir)
         
         self.imagehomem = ttk.Label(self)
         self.imagehomem.configure(image=self.imagemale)
@@ -292,9 +298,9 @@ class PaginaParticipantes(ttk.Frame):
         self.var_mulheres = IntVar(self.escolhe_qtde_mulheres)
         self.escolhe_qtde_mulheres.configure(textvariable=self.var_mulheres)
         self.escolhe_qtde_mulheres.place(y=123, x=161, width=30, height= 25)
-        lista_variaveis = amz.leitura_variaveis(base_dir)
-        lista_variaveis[1] = self.var_mulheres.get()
-        amz.armazena_variaveis(lista_variaveis, base_dir)
+#        lista_variaveis = amz.leitura_variaveis(base_dir)
+#        lista_variaveis[1] = self.var_mulheres.get()
+#        amz.armazena_variaveis(lista_variaveis, base_dir)
         
         self.imagemulher = ttk.Label(self)
         self.imagemulher.configure(image=self.imagefemale)
@@ -312,9 +318,9 @@ class PaginaParticipantes(ttk.Frame):
         self.var_crianças = IntVar(self.escolhe_qtde_crianças)
         self.escolhe_qtde_crianças.configure(textvariable=self.var_crianças)
         self.escolhe_qtde_crianças.place(y=193, x=161, width=30, height= 25)
-        lista_variaveis = amz.leitura_variaveis(base_dir)
-        lista_variaveis[2] = self.var_crianças.get()
-        amz.armazena_variaveis(lista_variaveis, base_dir)
+#        lista_variaveis = amz.leitura_variaveis(base_dir)
+#        lista_variaveis[2] = self.var_crianças.get()
+#        amz.armazena_variaveis(lista_variaveis, base_dir)
         
         self.imagecriança = ttk.Label(self)
         self.imagecriança.configure(image=self.imagechild)
@@ -382,6 +388,8 @@ class PaginaCarnes(ttk.Frame):
         VoltarButton = ttk.Button(self, text='VOLTAR',
                                command=lambda: controller.mostrar_frame(PaginaMyBBQ))
         VoltarButton.grid(column=3, row=100, sticky=("nsew"))
+
+#lista_variaveis = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     
     def leitura_checkbuttons_carnes(self):
         lista_variaveis = amz.leitura_variaveis(base_dir)
@@ -442,6 +450,14 @@ class PaginaBebidas(ttk.Frame):
         VoltarButton = ttk.Button(self, text='VOLTAR',
                                command=lambda: controller.mostrar_frame(PaginaMyBBQ))
         VoltarButton.grid(column=3, row=100, sticky=("nsew"))
+
+    def leitura_checkbuttons_bebidas(self):
+        lista_variaveis = amz.leitura_variaveis(base_dir)
+        self.varb1.set(lista_variaveis[10])
+        self.varb2.set(lista_variaveis[11])
+        self.varb3.set(lista_variaveis[12])
+        self.varb4.set(lista_variaveis[13])
+        self.varbn1.set(lista_variaveis[14])
         
     def zerar_checkbuttons_bebidas(self):
         self.varb1.set(0)
@@ -454,6 +470,7 @@ class PaginaRelatorio(ttk.Frame):
     
     def __init__(self, parent, controller):
         dicionario_comidas, dicionario_bebidas, lista_comidas, lista_bebidas = amz.leitura(base_dir)
+        lista_variaveis = amz.leitura_variaveis(base_dir)
         ttk.Frame.__init__(self, parent)
         
         self.itens = ttk.Label(self, text='Nome', font=('Helvetica', 8, 'bold', 'italic'))

@@ -68,6 +68,7 @@ class BBQ:
         self.PaginaMyBBQ.columnconfigure(3, minsize=100)
         self.PaginaMyBBQ.columnconfigure(4, minsize=50)
         self.PaginaMyBBQ.columnconfigure(5, minsize=50)
+        self.PaginaMyBBQ.grid(row=0, column=0, sticky="nsew")
         
         #botao dos que acessa os CONVIDADOS
         self.participantesButton = ttk.Button(self.PaginaMyBBQ)
@@ -105,6 +106,7 @@ class BBQ:
         
         self.PaginaParticipantes = ttk.Frame(self.window)
         self.PaginaParticipantes.rowconfigure(2, minsize = 50)
+        self.PaginaParticipantes.grid(row=0, column=0, sticky="nsew")
         
         self.convidados = ttk.Label(self.PaginaParticipantes, text="CONVIDADOS")
         self.convidados.grid(row=0, column=2, sticky="nsew")
@@ -170,6 +172,7 @@ class BBQ:
         self.PaginaCarnes.columnconfigure(3, minsize = 50)
         self.PaginaCarnes.columnconfigure(4, minsize = 50)
         self.PaginaCarnes.columnconfigure(5, minsize = 50)
+        self.PaginaCarnes.grid(row=0, column=0, sticky="nsew")
         
         self.label = ttk.Label(self.PaginaCarnes, text="Selecione as carnes que \n você deseja em seu churrasco")
         self.label.grid(row=0, column=1, sticky="nsew")
@@ -228,6 +231,7 @@ class BBQ:
         
         #FRAME DA PAGINA DE BEBIDAS       
         self.PaginaBebidas = ttk.Frame(self.window)
+        self.PaginaBebidas.grid(row=0, column=0, sticky="nsew")
         
         self.texto_bebidas = ttk.Label(self.PaginaBebidas)
         self.texto_bebidas.configure(text="Selecione as bebidas que \n você deseja em seu churrasco")
@@ -302,6 +306,7 @@ class BBQ:
         
         #FRAME DA PAGINA LISTA
         self.PaginaLista = ttk.Frame(self.window)
+        self.PaginaLista.grid(row=0, column=0, sticky="nsew")
         
         
         
@@ -309,6 +314,7 @@ class BBQ:
         self.VoltarButton.configure(text='VOLTAR', command=self.mostrar_PaginaMyBBQ)
         self.VoltarButton.grid(column=3, row=100, sticky=("nsew"))
         
+        self.mostrar_PaginaInicial()
         
     
         
