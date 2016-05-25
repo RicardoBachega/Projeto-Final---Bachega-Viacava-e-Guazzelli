@@ -108,4 +108,3 @@ def calcula_quantidades(dicionario_comidas, dicionario_bebidas, lista_comidas, l
     if "Refrigerante" in lista_bebidas:
         dicionario_bebidas["Refrigerante"] += (((homens * 1000) + (mulheres * 500) + (crianças * 500))/len(lista_bebidas))
     return dicionario_comidas, dicionario_bebidas
-    
