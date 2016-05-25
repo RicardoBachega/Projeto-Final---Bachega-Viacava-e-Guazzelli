@@ -1,8 +1,8 @@
 import armazenamento as amz
 import email
 
-#base_dir =  r"C:\Users\Henrique\Documents\DESOFT\Projeto-Final---Bachega-Viacava-e-Guazzelli"
-base_dir = r"C:\Users\B155 FIRE V3\Documents\Projeto-Final---Bachega-Viacava-e-Guazzelli"
+base_dir =  r"C:\Users\Henrique\Documents\DESOFT\Projeto-Final---Bachega-Viacava-e-Guazzelli"
+#base_dir = r"C:\Users\B155 FIRE V3\Documents\Projeto-Final---Bachega-Viacava-e-Guazzelli"
 #base_dir =  r"C:\Users\RICARDO\Documents\GitHub\Projeto-Final---Bachega-Viacava-e-Guazzelli"
 
 
@@ -23,7 +23,7 @@ class BBQ(ttk.Frame):
         
         self.mainframe = ttk.Frame(self.window)
         self.mainframe.grid(column=0, row=0, sticky=("nsew"))
-#        
+        
         self.window.iconbitmap(self, default='beef2.ico')
        
         self.frames = {}
