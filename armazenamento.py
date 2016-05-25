@@ -1,7 +1,7 @@
 import pickle
 
-base_dir =  r"C:\Users\Henrique\Documents\DESOFT\Projeto-Final---Bachega-Viacava-e-Guazzelli"
-#base_dir = r"C:\Users\B155 FIRE V3\Documents\Projeto-Final---Bachega-Viacava-e-Guazzelli"
+#base_dir =  r"C:\Users\Henrique\Documents\DESOFT\Projeto-Final---Bachega-Viacava-e-Guazzelli"
+base_dir = r"C:\Users\B155 FIRE V3\Documents\Projeto-Final---Bachega-Viacava-e-Guazzelli"
 
 # homens, mulheres, crianças, picanha, maminha, fraldinha, contra-filé, alcatra, coracao, linguica, whisky, vodka, tequila, cerveja, refrigerante
 #lista_variaveis = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
@@ -108,4 +108,3 @@ def calcula_quantidades(dicionario_comidas, dicionario_bebidas, lista_comidas, l
     if "Refrigerante" in lista_bebidas:
         dicionario_bebidas["Refrigerante"] += (((homens * 1000) + (mulheres * 500) + (crianças * 500))/len(lista_bebidas))
     return dicionario_comidas, dicionario_bebidas
-    
